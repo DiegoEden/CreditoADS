@@ -1,0 +1,149 @@
+.imgfondo {
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center center;
+
+}
+
+body {
+    font-family: 'Montserrat' !important;
+}
+
+
+
+body:after {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    content: '';
+    background: #000;
+    opacity: .3;
+    z-index: -1;
+}
+
+.seccion {
+    padding: 7em 0;
+
+}
+
+.heading-section {
+    color: #fff;
+    font-size: 20px;
+
+}
+
+
+::-webkit-scrollbar {
+    width: 0px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+    background: #f1f1f1;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+    background: #3E5C7F;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+    background: #555;
+}
+
+
+.login-wrap {
+    position: relative;
+    color: rgba(255, 255, 255, 0.9);
+}
+
+.form-group {
+
+    margin-bottom: 1.5rem;
+}
+
+.login-input {
+
+    height: 50px !important;
+    color: white !important;
+    border: 1px solid transparent !important;
+    background: rgba(255, 255, 255, 0.08) !important;
+    border-radius: 40px !important;
+    padding-left: 20px !important;
+    padding-right: 20px !important;
+    transition: 0.3s !important;
+}
+
+.login-input:focus {
+    border-color: white !important;
+    box-shadow: none !important;
+    background: transparent !important;
+
+}
+
+.login-input:hover {
+    border-color: white !important;
+    box-shadow: none !important;
+    background: transparent !important;
+}
+
+.login-input::-webkit-input-placeholder {
+    color: white !important;
+}
+
+.form-control::-webkit-input-placeholder {
+    color: white;
+}
+
+input::placeholder {
+    color: white;
+}
+
+.submit {
+    background-color: #3E5C7F !important;
+    border-radius: 20px !important;
+    color: white !important;
+    height: 60px !important;
+    transition: 0.3s;
+
+}
+
+.submit:hover {
+    background-color: #052D40 !important;
+    color: white !important;
+    transition: 0.3s;
+
+}
+
+.registrarme {
+
+    color: #f1f1f1;
+    transition: 0.3s;
+
+}
+
+.registrarme:hover {
+
+    color: white;
+    transition: 0.3s;
+
+}
+
+
+.forgotPassword {
+
+    background-color: #E4BBA5 !important;
+    border-radius: 20px !important;
+    color: black !important;
+    height: 60px !important;
+    transition: 0.3s;
+}
+
+.forgotPassword:hover {
+    background-color: #987C6E !important;
+    color: white !important;
+    transition: 0.3s;
+}
