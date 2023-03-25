@@ -1,0 +1,91 @@
+body {
+    font-family: 'Montserrat';
+    background-color: var(--body-color);
+    transition: var(--animation);
+}
+
+.seccion {
+    padding: 8em 0;
+
+}
+
+
+.submit {
+    background-color: #3E5C7F;
+    border-radius: 10px;
+    color: white;
+    height: 50px;
+    transition: 0.3s;
+
+
+}
+
+.submit:hover {
+    background-color: #052D40;
+    color: white;
+    transition: 0.3s;
+
+}
+
+
+a {
+    padding-top: 10px !important;
+}
+
+
+h5 {
+    color: var(--colorLetra);
+}
+
+label {
+    color: var(--colorLetra);
+}
+
+
+.input-forms {
+    color: var(--colorLetra);
+    background-color: var(--body-color);
+    border-radius: 10px;
+    border: 1px solid var(--colorLetra);
+    transition: var(--animation);
+}
+
+.input-forms:hover {
+    border-color: var(--colorLetra);
+    box-shadow: none;
+    background-color: var(--colorContainer);
+    transition: 0.3s;
+}
+
+.input-forms:focus {
+    background-color: var(--body-color);
+    box-shadow: none;  
+    color: var(--colorLetra);
+}
+
+.contenedorForm {
+
+    background-color: var(--colorContainer);
+    border-radius: 10px;
+    padding-top: 20px;
+    padding-bottom: 20px;
+    padding-left: 20px;
+    padding-right: 20px;
+    transition: var(--animation);
+
+}
+
+.container .form-outer {
+    width: 100%;
+    overflow: hidden;
+}
+
+.form-outer .formDatos {
+    width: 400%;
+}
+
+.form-outer form .page {
+    width: 25%;
+    transition: 0.3s;
+
+}

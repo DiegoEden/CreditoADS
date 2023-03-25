@@ -12,9 +12,9 @@
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
     <link rel="icon" type="image/png" href="../../resources/img/system/logo.png">
-    <link rel="stylesheet" type="text/css" href="../../resources/css/login_styles.css">
 
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
+    <link rel="stylesheet" type="text/css" href="../../resources/css/login_styles.css">
     <title>Iniciar sesión | CréditoADS</title>
 </head>
 
@@ -42,9 +42,9 @@
                                 <button type="submit" class="form-control btn submit px-3">Ingresar</button>
                             </div>
                         </form>
-                        <p class="w-100 text-center">— ¿No tienes una cuenta? <a class="registrarme" href="">Regístrate</a> — </p>
+                        <p class="w-100 text-center">— ¿No tienes una cuenta? <a class="registrarme" href="checkIn.php">Regístrate</a> — </p>
                         <div class="form-group">
-                            <button type="submit" class="form-control btn forgotPassword px-3">He olvidado mi contraseña</button>
+                            <a href="" class="form-control btn forgotPassword px-3">He olvidado mi contraseña</a>
                         </div>
                     </div>
                 </div>
