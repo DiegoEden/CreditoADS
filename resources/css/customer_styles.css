@@ -29,13 +29,9 @@ body {
 
 
 a {
-    padding-top: 10px !important;
+    padding-top: 12px !important;
 }
 
-
-h5 {
-    color: var(--colorLetra);
-}
 
 label {
     color: var(--colorLetra);
@@ -59,7 +55,7 @@ label {
 
 .input-forms:focus {
     background-color: var(--body-color);
-    box-shadow: none;  
+    box-shadow: none;
     color: var(--colorLetra);
 }
 
@@ -88,4 +84,40 @@ label {
     width: 25%;
     transition: 0.3s;
 
+}
+
+label {
+    transition: var(--animation);
+}
+
+
+.btnPass {
+
+    position: absolute;
+    right: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    background-color: transparent;
+    border: none;
+    color: var(--colorLetra);
+    padding-top: 8px;
+    transition: 0.3s;
+    margin-right: 5px;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+
+    transition: var(--animation);
+    color: var(--colorLetra);
+
+}
+
+.alertaText{
+
+    font-size: 14px;
 }

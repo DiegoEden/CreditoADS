@@ -79,6 +79,7 @@ body:after {
     border-color: white;
     box-shadow: none;
     background: transparent;
+    color: white;
 
 }
 
@@ -86,6 +87,7 @@ body:after {
     border-color: white;
     box-shadow: none;
     background: transparent;
+    color: white;
 }
 
 .login-input::-webkit-input-placeholder {
@@ -138,4 +140,20 @@ body:after {
     background-color: #987C6E;
     color: white;
     transition: 0.3s;
+}
+
+
+
+.btnPass {
+
+    position: absolute;
+    right: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    background-color: transparent;
+    border: none;
+    color: white;
+    padding-top: 9px;
+    transition: 0.3s;
+    margin-right: 10px;
 }

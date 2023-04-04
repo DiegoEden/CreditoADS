@@ -25,28 +25,49 @@
 
         <div class="container">
             <div class="row d-flex justify-content-center align-items-center h-100">
-                <div class="col-md-6">
-                    <h5 id="titulos">Ahora, por favor, llena los campos solicitados en el formulario</h5>
+                <div class="col-md-8">
+                    <h5 id="titulos">¡Hola!, primero debemos comprobar que tu cuenta exista en nuestros registros</h5>
                 </div>
             </div>
             <br>
         </div>
-        <div class="container contenedorForm ">
+        <div class="container contenedorForm " id="contenedorCuenta">
 
+            <br>
             <div class="form-outer ">
+                <div class="page">
+                    <form method="post" id="comprobar-form" autocomplete="off">
+                        <div class="form-group">
+                            <label for="txtCuenta">Ingresa tu número de cuenta</label>
+                            <input type="text" name="txtCuenta" id="txtCuenta" class="form-control input-forms" required>
+                        </div>
+                        <br>
+                        <a class="btn submit" href="index.php" id="btnInicio">Volver a inicio</a>
+                        <button type="submit" class="btn submit" id="btnComprobar">Comprobar</button>
 
-                <form action="" class="formDatos">
+                    </form>
+                </div>
+                <br>
+
+            </div>
+        </div>
+        <br>
+
+
+        <div class="container contenedorForm d-none" id="contenedorDatos">
+            <div class="form-outer ">
+                <form method="post" id="register-form" autocomplete="off" class="formDatos">
                     <div class="page">
                         <div class="row">
                             <div class="col-xl-6 col-md-6 col-sm-12 col-xs-12">
                                 <div class="form-group">
                                     <label for="txtNombre">Nombre</label>
-                                    <input type="text" name="txtNombre" id="txtNombre" class="form-control input-forms" required>
+                                    <input type="text" name="txtNombre" id="txtNombre" class="form-control input-forms" required maxlength="50">
                                 </div>
                                 <br>
                                 <div class="form-group">
                                     <label for="txtApellido">Apellido</label>
-                                    <input type="text" name="txtApellido" id="txtApellido" class="form-control input-forms" required>
+                                    <input type="text" name="txtApellido" id="txtApellido" class="form-control input-forms" required maxlength="50">
                                 </div>
 
                                 <br>
@@ -57,7 +78,12 @@
                                 <br>
                                 <div class="form-group">
                                     <label for="txtOcupacion">Ocupación</label>
-                                    <input type="text" name="txtOcupacion" id="txtOcupacion" class="form-control input-forms" required>
+                                    <input type="text" name="txtOcupacion" id="txtOcupacion" class="form-control input-forms" required maxlength="100">
+                                </div>
+                                <br>
+                                <div class="form-group">
+                                    <label for="txtDui">DUI</label>
+                                    <input type="text" name="txtDui" id="txtDui" class="form-control input-forms" required>
                                 </div>
                                 <br>
                                 <div class="form-group">
@@ -65,43 +91,85 @@
                                     <input type="text" name="txtNum" id="txtNum" class="form-control input-forms" required>
                                 </div>
                                 <br>
+                                <label for="genero">Género</label>
+                                <select name="genero" id="genero" class="form-control input-forms" required>
+                                    <option value="">Seleccione</option>
+                                    <option value="M">Masculino</option>
+                                    <option value="F">Femenino</option>
+
+
+                                </select>
+                                <br>
+
+
+                                <input type="text" id="txtCuenta2" name="txtCuenta2" class="d-none">
                             </div>
                             <div class="col-xl-6 col-md-6 col-sm-12 col-xs-12">
                                 <div class="form-group">
-                                    <label for="estadoCivil">Estado Civil</label>
+                                    <label for="estadoCivil">Estado civil</label>
                                     <select name="estadoCivil" id="estadoCivil" class="form-control input-forms" required>
-                                        <option disabled selected>Seleccione</option>
-                                        <option value="Casado">Casado</option>
-                                        <option value="Casado">Casado</option>
-                                        <option value="Casado">Casado</option>
-                                        <option value="Casado">Casado</option>
-                                        <option value="Casado">Casado</option>
+                                        <option value="">Seleccione</option>
+                                        <option value="Casado">Casado/a</option>
+                                        <option value="Soltero">Soltero/a</option>
+                                        <option value="Viudo">Viudo/a</option>
+
 
                                     </select>
                                 </div>
                                 <br>
                                 <div class="form-group">
                                     <label for="txtEmail">Correo electrónico</label>
-                                    <input type="email" name="txtEmail" id="txtEmail" class="form-control input-forms" required>
+                                    <input type="email" name="txtEmail" id="txtEmail" class="form-control input-forms" required maxlength="50">
 
+                                </div>
+                                <br>
+                                <div class="form-group">
+                                    <label for="txtDireccion">Dirección</label>
+                                    <textarea type="text" name="txtDireccion" id="txtDireccion" class="form-control input-forms" required rows="1"></textarea>
                                 </div>
                                 <br>
                                 <div class="form-group">
                                     <label for="username">Nombre de usuario</label>
-                                    <input type="text" name="username" id="username" class="form-control input-forms" required>
+                                    <input type="text" name="username" id="username" class="form-control input-forms" required maxlength="50">
 
                                 </div>
+
                                 <br>
-                                <div class="form-group">
-                                    <label for="password-field">Contraseña</label>
-                                    <input id="password-field" name="password-field" type="password" class="form-control input-forms" required="">
+
+                                <div class="alert alert-warning alert-dismissible fade show" role="alert">
+                                    <strong class="alertaText">Advertencia</strong>
+                                    <p class="alertaText">Tu contraseña debe contener al menos una letra mayúscula, una letra minúscula,
+                                        un número y un carácter especial, y que tenga entre 8 y 16 caracteres.
+                                        También asegúrate que la contraseña no contenga espacios en blanco</p>
+                                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
                                 </div>
-                                <br>
-                                <div class="form-group">
-                                    <label for="password-field">Contraseña</label>
-                                    <input id="password-field" name="password-field" type="password" class="form-control input-forms" required="">
+                                <div style="position: relative;">
+                                    <label for="password">Contraseña</label>
+                                    <div style="position: relative;">
+                                        <input id="password" name="password" type="password" class="form-control input-forms"  required maxlength="50">
+                                        <button type="button" class="btnPass" onclick="togglePassword('password', 'Pass1')"><span id="Pass1" class="material-symbols-outlined">
+                                                visibility
+                                            </span></button>
+                                    </div>
                                 </div>
+
                                 <br>
+
+                                <div style="position: relative;">
+                                    <label for="password">Comprobar contraseña</label>
+                                    <div style="position: relative;">
+                                        <input id="passwordVerify" name="passwordVerify" type="password" class="form-control input-forms" required maxlength="50">
+                                        <button type="button" class="btnPass" onclick="togglePassword('passwordVerify', 'Pass2')"><span id="Pass2" class="material-symbols-outlined">
+                                                visibility
+                                            </span></button>
+                                    </div>
+                                </div>
+
+
+                                <br>
+
+
+
 
 
                             </div>
@@ -109,19 +177,12 @@
                         </div>
 
                     </div>
-
-
-
-                    <a href="checkIn.php" class="btn submit">Volver</a>
+                    <a class="btn submit" id="btnVolver">Volver</a>
                     <button type="submit" class="btn submit">Crear cuenta</button>
-
-
-
-
-
                 </form>
             </div>
         </div>
+
 
 
     </section>
@@ -129,15 +190,18 @@
 
 
 
-    <button onclick="modoOscuro()">osc</button>
-    <button onclick="modoClaro()">claro</button>
+<!--     <button onclick="modoOscuro()">osc</button>
+    <button onclick="modoClaro()">claro</button> -->
 
 
 
     <script src="../../app/controllers/customer/signIn.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-A3rJD856KowSb7dwlZdYEkO39Gagi7vIsF0jrRAoQmDKKtQBHUuLZ9AsSv4jD4Xa" crossorigin="anonymous"></script>
     <script src="../../resources/js/sweetalert.min.js"></script>
+    <script src="../../app/helpers/components.js"></script>
     <script src="../../app/controllers/template.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.15/jquery.mask.min.js"></script>
+
 </body>
 
 </html>
