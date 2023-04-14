@@ -43,7 +43,6 @@ function load() {
 
     }
 
-
     console.log(mode);
 
 

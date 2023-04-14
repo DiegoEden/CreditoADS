@@ -26,7 +26,7 @@
         <div class="container">
             <div class="row d-flex justify-content-center align-items-center h-100">
                 <div class="col-md-8">
-                    <h5 id="titulos">¡Hola!, primero debemos comprobar que tu cuenta exista en nuestros registros</h5>
+                    <h5 id="titulos">¡Hola!, primero debemos comprobar que tu número de cuenta exista en nuestros registros</h5>
                 </div>
             </div>
             <br>
@@ -42,7 +42,7 @@
                             <input type="text" name="txtCuenta" id="txtCuenta" class="form-control input-forms" required>
                         </div>
                         <br>
-                        <a class="btn submit" href="index.php" id="btnInicio">Volver a inicio</a>
+                        <a class="btn submit" href="../../index.php" id="btnInicio">Volver a inicio</a>
                         <button type="submit" class="btn submit" id="btnComprobar">Comprobar</button>
 
                     </form>
@@ -146,7 +146,7 @@
                                 <div style="position: relative;">
                                     <label for="password">Contraseña</label>
                                     <div style="position: relative;">
-                                        <input id="password" name="password" type="password" class="form-control input-forms"  required maxlength="50">
+                                        <input id="password" name="password" type="password" class="form-control input-forms"  required maxlength="16">
                                         <button type="button" class="btnPass" onclick="togglePassword('password', 'Pass1')"><span id="Pass1" class="material-symbols-outlined">
                                                 visibility
                                             </span></button>
@@ -158,7 +158,7 @@
                                 <div style="position: relative;">
                                     <label for="password">Comprobar contraseña</label>
                                     <div style="position: relative;">
-                                        <input id="passwordVerify" name="passwordVerify" type="password" class="form-control input-forms" required maxlength="50">
+                                        <input id="passwordVerify" name="passwordVerify" type="password" class="form-control input-forms" required maxlength="16">
                                         <button type="button" class="btnPass" onclick="togglePassword('passwordVerify', 'Pass2')"><span id="Pass2" class="material-symbols-outlined">
                                                 visibility
                                             </span></button>

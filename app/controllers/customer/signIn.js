@@ -58,7 +58,7 @@ btnVolver.addEventListener('click', () => {
 
     divDatos.className = 'animate__animated animate__fadeOutUp  container contenedorForm d-none';
     divCuenta.className = 'animate__animated  animate__fadeInUp container contenedorForm ';
-    Title.textContent = '¡Hola!, primero debemos comprobar que tu cuenta exista en nuestros registros';
+    Title.textContent = '¡Hola!, primero debemos comprobar que tu número de cuenta exista en nuestros registros';
 
 });
 
@@ -112,7 +112,9 @@ document.getElementById('register-form').addEventListener('submit', function (ev
             request.json().then(function (response) {
                 // Se comprueba si la respuesta es satisfactoria, de lo contrario se muestra un mensaje con la excepción.
                 if (response.status) {
-                    sweetAlert(1, response.message, 'index.php');
+                    sweetAlert(1, response.message, '../../index.php');
+
+
 
 
                 } else {

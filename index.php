@@ -11,14 +11,14 @@
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,0,0" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
-    <link rel="icon" type="image/png" href="../../resources/img/system/logo.png">
+    <link rel="icon" type="image/png" href="resources/img/system/logo.png">
 
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
-    <link rel="stylesheet" type="text/css" href="../../resources/css/login_styles.css">
+    <link rel="stylesheet" type="text/css" href="resources/css/login_styles.css">
     <title>Iniciar sesión | CréditoADS</title>
 </head>
 
-<body class="js-fullheight imgfondo" style="background-image: url(../../resources/img/system/bg.jpg);">
+<body class="js-fullheight imgfondo" style="background-image: url(resources/img/system/bg.jpg);">
 
     <section class="seccion animate__animated animate__backInDown animate__slow">
         <div class="container">
@@ -31,17 +31,17 @@
                 <div class="col-md-6 col-lg-4">
                     <div class="login-wrap p-0">
                         <h5 class="mb-4 text-center">¿Tienes una cuenta con nosotros?</h5>
-                        <form action="#" class="signin-form">
+                        <form method="post" id="login-form" autocomplete="off">
                             <div class="form-group">
-                                <input type="email" class="form-control login-input" placeholder="Correo electrónico" required="">
+                                <input type="email" class="form-control login-input" placeholder="Correo electrónico"  autocomplete="email" required id="txtCorreo" name="txtCorreo">
                             </div>
 
 
                             <div class="form-group">
                                 <div style="position: relative;">
                                     <div style="position: relative;">
-                                        <input id="password" name="password" type="password" class="form-control login-input" placeholder="Contraseña" required>
-                                        <button type="button" class="btnPass" onclick="togglePassword('password', 'Pass1')"><span id="Pass1" class="material-symbols-outlined">
+                                        <input id="txtPassword" name="txtPassword" type="password" class="form-control login-input" placeholder="Contraseña" autocomplete="current-password" required>
+                                        <button type="button" class="btnPass" onclick="togglePassword('txtPassword', 'Pass1')"><span id="Pass1" class="material-symbols-outlined">
                                                 visibility
                                             </span></button>
                                     </div>
@@ -53,7 +53,7 @@
                                 <button type="submit" class="form-control btn submit px-3">Ingresar</button>
                             </div>
                         </form>
-                        <p class="w-100 text-center">— ¿No tienes una cuenta? <a class="registrarme" href="register.php">Regístrate</a> — </p>
+                        <p class="w-100 text-center">— ¿No tienes una cuenta? <a class="registrarme" href="views/customer/register.php">Regístrate</a> — </p>
                         <div class="form-group">
                             <a href="" class="form-control btn forgotPassword px-3">He olvidado mi contraseña</a>
                         </div>
@@ -65,9 +65,9 @@
 
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js" integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN" crossorigin="anonymous"></script>
-    <script src="../../resources/js/sweetalert.min.js"></script>
-    <script src="../../app/controllers/customer/index.js"></script>
-    <script src="../../app/helpers/components.js"></script>
+    <script src="resources/js/sweetalert.min.js"></script>
+    <script src="app/controllers/customer/index.js"></script>
+    <script src="app/helpers/components.js"></script>
 
 
 
@@ -75,3 +75,4 @@
 </body>
 
 </html>
+

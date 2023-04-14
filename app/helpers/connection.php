@@ -13,12 +13,13 @@ Class Database{
     private static function connect(){
 
         // Credenciales.
-        $server = 'localhost';
+        $server = '(local)';
         $database = 'CreditoADS';
-        $username = 'postgres';
-        $password = '1234';
+        $username = 'polon';
+        $password = '';
         //Crear conexión.
-        self::$connection = new PDO('pgsql:host='.$server.';dbname='.$database.';port=5432', $username, $password);
+        self::$connection = new PDO('sqlsrv:Server='.$server.';Database='.$database, NULL, NULL);
+
 
     }
 
@@ -96,7 +97,7 @@ Class Database{
                 self::$error = 'Registro ocupado, no se puede eliminar';
                 break;
             default:
-                self::$error = 'Ocurrió un problema en la base de datos';
+                self::$error = $message;
         }
     }
 
@@ -125,5 +126,3 @@ Class Database{
         }
     }
 }
-
-?>

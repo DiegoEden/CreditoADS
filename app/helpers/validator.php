@@ -234,7 +234,7 @@ class Validator
         un número y un carácter especial, y que tenga entre 8 y 16 caracteres.
          También asegura que la contraseña no contenga espacios en blanco.*/
 
-        if (preg_match('/^\S*(?=\S{8,16})(?=\S*[a-z])(?=\S*[A-Z])(?=\S*[\d])(?=\S*[\W])\S*$/', $value)) {
+        if (preg_match('/^\S*(?=\S{8,100})(?=\S*[a-z])(?=\S*[A-Z])(?=\S*[\d])(?=\S*[\W])\S*$/', $value)) {
             return true;
         } else {
             $this->passwordError = 'Su contraseña no cumple con los requisitos especificados.'; 

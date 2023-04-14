@@ -68,7 +68,6 @@ if (isset($_GET['action'])) {
                                                                                     $result['exception'] = 'Usuario no registrado';
                                                                                 }
                                                                             } else {
-                                                                                
                                                                             }
                                                                         } else {
 
@@ -129,7 +128,30 @@ if (isset($_GET['action'])) {
                 $result['exception'] = 'Nombres incorrectos';
             }
             break;
-        case 'edit':
+        case 'logIn':
+            $_POST = $customers->validateForm($_POST);
+            if ($customers->checkUser($_POST['txtCorreo'])) {
+                if ($customers->checkEstado()) {
+                    if ($customers->checkPassword($_POST['txtPassword'])) {
+                        $_SESSION['id_cliente'] = $customers->get_id_cliente();
+                        $_SESSION['estadoCivil'] = $customers->get_estado_civil();
+                        $_SESSION['nombres'] = $customers->get_nombres();
+                        $_SESSION['apellidos'] = $customers->get_apellidos();
+                        $_SESSION['username'] =  $customers->get_username();
+                        $_SESSION['correo'] = $customers->get_correo_electronico();
+                        $_SESSION['numTel'] = $customers->get_telefono();
+                        $result['status'] = 1;
+                        $result['message'] = 'Acceso concedido, bienvenido '.$customers->get_username();
+
+                    } else {
+                        $result['exception'] = 'La contraseña ingresada es incorrecta';
+                    }
+                } else {
+                    $result['exception'] = 'El usuario está inactivo o bloqueado';
+                }
+            } else {
+                $result['exception'] = 'El correo ingresado es incorrecto.';
+            }
             break;
         default:
             $result['exception'] = 'Acción no disponible dentro de la sesión';

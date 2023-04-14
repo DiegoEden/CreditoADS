@@ -17,6 +17,7 @@ class Customers extends Validator
     private $estado_civil = null;
     private $dui = null;
     private $fecha_nacimiento = null;
+    private $id_estado_cliente = null;
 
 
     public function set_id_cliente($value)
@@ -159,6 +160,15 @@ class Customers extends Validator
         }
     }
 
+    public function set_id_estado_cliente($value)
+    {
+        if ($this->validateNaturalNumber($value)) {
+            $this->id_estado_cliente = $value;
+            return true;
+        } else {
+            return false;
+        }
+    }
 
     public function get_id_cliente()
     {
@@ -230,6 +240,11 @@ class Customers extends Validator
         return $this->fecha_nacimiento;
     }
 
+    public function get_id_estado_cliente()
+    {
+        return $this->id_estado_cliente;
+    }
+
 
     public function cuentaExistente()
     {
@@ -261,9 +276,9 @@ class Customers extends Validator
 
         $hash = password_hash($this->pass, PASSWORD_DEFAULT);
 
-        $sql = 'INSERT INTO clientes(
-            id_cliente, nombres, apellidos, direccion, num_telefono, correo_electronico, fecha_nacimiento, estado_civil, ocupacion, username, pass, dui, genero, fecha_creacion, id_estado_cliente)
-            VALUES (default, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, default, 1);';
+        $sql = 'INSERT INTO Clientes(
+            nombres, apellidos, direccion, num_telefono, correo_electronico, fecha_nacimiento, estado_civil, ocupacion, username, pass, dui, genero, fecha_creacion, id_estado_cliente)
+            VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, default, 1);';
 
         $params = array(
             $this->nombres, $this->apellidos, $this->direccion, $this->telefono, $this->correo_electronico,
@@ -284,8 +299,59 @@ class Customers extends Validator
     public function crearCliente_cuenta()
     {
 
-        $sql = 'update Cuentas set id_cliente = ? where numero_cuenta =?';
+        $sql = 'UPDATE Cuentas set id_cliente = ? where numero_cuenta =?';
         $params = array($this->id_cliente, $this->numero_cuenta);
         return Database::executeRow($sql, $params);
+    }
+
+
+    public function checkUser($email)
+    {
+
+        $sql = 'SELECT id_cliente, nombres, apellidos, direccion, num_telefono, correo_electronico, fecha_nacimiento, estado_civil, ocupacion, username, pass, dui, genero, fecha_creacion, id_estado_cliente
+        FROM clientes where correo_electronico = ?';
+        $params = array($email);
+        if ($data = Database::getRow($sql, $params)) {
+
+            $this->id_cliente = $data['id_cliente'];
+            $this->nombres = $data['nombres'];
+            $this->apellidos = $data['apellidos'];
+            $this->direccion = $data['direccion'];
+            $this->telefono = $data['num_telefono'];
+            $this->correo_electronico = $data['correo_electronico'];
+            $this->fecha_nacimiento = $data['fecha_nacimiento'];
+            $this->estado_civil = $data['estado_civil'];
+            $this->ocupacion = $data['ocupacion'];
+            $this->username = $data['username'];
+            $this->dui = $data['dui'];
+            $this->genero = $data['genero'];
+            $this->id_estado_cliente = $data['id_estado_cliente'];
+
+            return true;
+        } else {
+
+            return false;
+        }
+    }
+
+    public function checkEstado()
+    {
+        if ($this->id_estado_cliente == 1) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    public function checkPassword($password)
+    {
+        $sql = 'SELECT pass from clientes where id_cliente = ?';
+        $params = array($this->id_cliente);
+        $data = Database::getRow($sql, $params);
+        if (password_verify($password, $data['pass'])) {
+            return true;
+        } else {
+            return false;
+        }
     }
 }
