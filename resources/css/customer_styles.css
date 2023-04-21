@@ -143,14 +143,7 @@ h6 {
 
 
 /* Google Font Import - Poppins */
-@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
 
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-    font-family: 'Poppins', sans-serif;
-}
 
 :root {
     /* ===== Colors ===== */
@@ -576,4 +569,19 @@ body.dark .home .text {
 .swal-button--confirm:focus {
     box-shadow: none;
     border: none;
+}
+
+
+.page-content {
+
+    width: 90%;
+    margin-left: 7rem;
+    transition: var(--tran-05);
+
+}
+
+#content.active {
+    width: calc(100% - 17rem);
+    margin-left: 17rem;
+    transition: var(--tran-05);
 }

@@ -114,10 +114,12 @@ $(function () {
   searchBtn = body.querySelector(".search-box"),
   modeSwitch = body.querySelector(".toggle-switch"),
   modeText = body.querySelector(".mode-text");
+  page = body.querySelector("#content");
 
 
 toggle.addEventListener("click" , () =>{
 sidebar.classList.toggle("close");
+content.classList.toggle("active");
 })
 
 

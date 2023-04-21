@@ -146,7 +146,17 @@ class Customer_page
     }
 
 
-
+    public static function welcomeMessage()
+    {
+        print('
+            <div class="row my-4">
+                <div class="col-12">
+                    <h2>¡Bienvenido '.$_SESSION['username'].'!</h2>
+                </div>
+            </div>
+        '                
+        );
+    }
 
     public static function footerTemplate($controller)
     {
