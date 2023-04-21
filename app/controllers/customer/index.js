@@ -2,6 +2,27 @@
 const API_CUSTOMER = 'app/api/customer.php?action=';
 
 
+document.addEventListener('DOMContentLoaded', function (e) {
+
+	fetch(API_CUSTOMER + 'checkSession')
+		.then(request => {
+			//Se verifica si la petición fue correcta
+			if (request.ok) {
+				request.json().then(response => {
+					//Se verifica si la respuesta no es correcta para redireccionar al primer uso
+					if (response.status) {
+						window.location.href = 'views/customer/dashboard.php';
+					} else {
+					}
+				})
+			} else {
+				console.log(request.status + ' ' + request.statusText);
+			}
+		}).catch(error => console.log(error))
+
+});
+
+
 //funcion para redimensionar la imagen de fondo del login
 (function ($) {
 

@@ -2,7 +2,7 @@
 
 include('../../app/helpers/customer_page.php');
 
-Customer_page::SideBarTemplate('CreditoADS | Dashboard')
+Customer_page::SideBarTemplate('CreditoADS | Mis cuentas')
 ?>
 
 
