@@ -40,10 +40,7 @@ document.addEventListener('DOMContentLoaded', function () {
 })
 
 
-$(document).ready(function () {
-    $("#txtDui").mask("00000000-0");
-    $("#txtNum").mask("0000-0000");
-});
+
 
 
 var alerta = document.querySelector('.alert');

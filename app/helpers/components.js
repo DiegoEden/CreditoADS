@@ -658,3 +658,9 @@ function togglePassword(input, icon) {
 
     }
 }
+
+
+$(document).ready(function () {
+    $("#txtDui").mask("00000000-0");
+    $("#txtNum").mask("0000-0000");
+});
