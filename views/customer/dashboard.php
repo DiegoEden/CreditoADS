@@ -7,11 +7,15 @@ Customer_page::SideBarTemplate('CreditoADS | Dashboard')
 
 
 <!-- Contenedor de la Pagina -->
-<div class="page-content p-3" id="content">
+<div class="page-content p-3  animate__animated animate__slideInLeft" id="content">
+
 
     <?php
     Customer_page::welcomeMessage();
     ?>
+
+
+
 </div>
 
 

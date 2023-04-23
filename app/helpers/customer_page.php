@@ -39,7 +39,7 @@ class Customer_page
 
             print '
             
-            <nav class="sidebar close">
+            <nav class="sidebar close  animate__animated animate__slideInLeft">
             <header>
                 <div class="image-text">
                     <span class="image">
@@ -84,12 +84,7 @@ class Customer_page
                                 <i class="bx bx-wallet-alt icon" ></i>
                                 <span class="text nav-text">Créditos</span>
                             </a>
-                        </li>
-    
-                       
-    
-                        
-    
+                        </li>   
                     </ul>
                 </div>
     
@@ -116,7 +111,7 @@ class Customer_page
                     </li>
 
                     <li class="">
-                        <a style="cursor:pointer" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                        <a style="cursor:pointer" data-bs-toggle="modal" data-bs-target="#modalProfile">
                             <i class="bx bx-cog icon"></i>
                             <span class="text nav-text">Configuración</span>
                         </a>
@@ -129,6 +124,40 @@ class Customer_page
             </div>
     
         </nav>
+
+        <nav class="navbar animate__animated animate__slideInUp fixed-bottom navbar-expand-sm mobileNav">
+            <div class="d-flex justify-content-center justify-content-center w-100">
+
+            <div class="dropup-center dropup">
+                <a class="mobileButton" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                <i class="bx bx-user-circle icon" ></i>
+
+                </a>
+                <ul class="dropdown-menu">
+                    <li><a class="dropdown-item" onclick="logOut()">Cerrar sesión</a></li>
+                    <li><a class="dropdown-item" id="modoClaro2" onclick="modoClaro()">Modo Claro</a></li>
+                    <li><a class="dropdown-item" id="modoOscuro2" onclick="modoOscuro()">Modo Oscuro</a></li>
+                    <li><a class="dropdown-item" data-bs-toggle="modal" data-bs-target="#modalProfile">Configuración</a></li>
+                </ul>
+            </div>
+                <a href="dashboard.php" class="mobileButton">
+                <i class="bx bx-home-alt icon"></i>
+                </a>     
+                <a href="accounts.php" class="mobileButton">
+                <i class="bx bx-briefcase icon"></i>
+                </a>           
+                <a href="#" class="mobileButton">
+                <i class="bx bx-transfer icon"></i>
+                </a>                
+                <a href="#" class="mobileButton">
+                <i class="bx bx-wallet-alt icon" ></i>
+                </a>     
+                
+                
+                   
+            </div>
+        </nav>
+        
 
     
             ';
@@ -151,7 +180,7 @@ class Customer_page
         print('
             <div class="row my-4">
                 <div class="col-12">
-                    <h2>¡Bienvenido '.$_SESSION['username'].'!</h2>
+                    <h2 class="titulo-dashboard">¡Bienvenido '.$_SESSION['username'].'!</h2>
                 </div>
             </div>
         '                
@@ -163,11 +192,11 @@ class Customer_page
         print('
                         
             <!-- Modal -->
-            <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal fade" id="modalProfile" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
             <div class="modal-dialog modal-dialog-centered  modal-lg">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h1 class="modal-title fs-5" id="exampleModalLabel">Ajustes de la cuenta</h1>
+                        <h1 class="modal-title fs-5">Ajustes de la cuenta</h1>
                         <button type="button" class="btn-close closeModalButton" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <div class="modal-body">

@@ -8,6 +8,10 @@ id_estado_cliente INT IDENTITY(1,1) not null primary key,
 	estado_cliente varchar(50)
 );
 
+
+Insert into Estado_cliente values('Activo'), ('Inactivo'), 
+('Bloqueado')
+
 create table Clientes(
 id_cliente INT IDENTITY(1,1) not null primary key, 
 	nombres varchar(50) not null, 
@@ -31,6 +35,10 @@ create table Tipo_cuentas(
 	tipo_cuenta varchar(100)
 );
 
+Insert into Tipo_cuentas values ('Cuenta de ahorro'), ('Cuenta corriente'),
+('Cuenta de inversión')
+
+
 
 create table Cuentas(
 id_cuenta INT IDENTITY(1,1) not null primary key, 
@@ -43,18 +51,12 @@ id_cuenta INT IDENTITY(1,1) not null primary key,
 
 
 
-Insert into Tipo_cuentas values ('Cuenta de ahorro'), ('Cuenta corriente'),
-('Cuenta de inversión')
-
-
-Insert into Estado_cliente values('Activo'), ('Inactivo'), 
-('Bloqueado')
-
-
 create table Tipo_transaccion(
 id_tipo_transaccion INT IDENTITY(1, 1) not null primary key,
 	tipo_transaccion varchar(100)
 );
+
+
 
 create table Transaccion(
 id_transaccion INT IDENTITY(1, 1) not null primary key, 
@@ -72,6 +74,8 @@ id_tipo_usuario  INT IDENTITY(1,1) not null primary key,
 	tipo_usuario varchar(50)
 
 );
+
+insert into Tipo_usuario values ('Asesor de crédito'), ( 'Administrador');
 
 create table Usuarios(
 id_usuario INT IDENTITY(1, 1) not null primary key, 
@@ -108,6 +112,8 @@ create table Tipo_pago(
 id_tipo_pago INT IDENTITY(1, 1) not null primary key, 
 	tipo_pago varchar(150)
 );
+
+
 
 create table Pagos(
 id_pago INT IDENTITY (1, 1) not null primary key, 

@@ -114,9 +114,6 @@ document.getElementById('register-form').addEventListener('submit', function (ev
                 if (response.status) {
                     sweetAlert(1, response.message, '../../index.php');
 
-
-
-
                 } else {
 
                     sweetAlert(3, response.exception, null);

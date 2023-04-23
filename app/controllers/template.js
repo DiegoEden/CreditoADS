@@ -12,7 +12,19 @@ document.addEventListener('DOMContentLoaded', function (e) {
         if (e.href == current_url) {
             e.classList += " currentMenu";
         }
-        
+
+
+
+    });
+
+
+    document.querySelectorAll(".mobileButton").forEach(function (e) {
+        if (e.href == current_url) {
+            e.classList += " currentMenu";
+        }
+
+
+
     });
 
 
@@ -58,8 +70,8 @@ function load() {
 
     }
 
-    console.log(mode);
-
+/*     console.log(mode);
+ */
 
 }
 
@@ -76,6 +88,8 @@ function modoOscuro() {
 
     document.getElementById("modoClaro").style.setProperty("display", "flex");
     document.getElementById("modoOscuro").style.setProperty("display", "none");
+    document.getElementById("modoClaro2").style.setProperty("display", "block");
+    document.getElementById("modoOscuro2").style.setProperty("display", "none");
 
     document.documentElement.style.setProperty('--imgClose', 'url("../../resources/img/system/exitLight.png")');
 
@@ -95,6 +109,9 @@ function modoClaro() {
     document.getElementById("modoClaro").style.setProperty("display", "none");
     document.getElementById("modoOscuro").style.setProperty("display", "flex");
 
+    document.getElementById("modoClaro2").style.setProperty("display", "none");
+    document.getElementById("modoOscuro2").style.setProperty("display", "block");
+
     document.documentElement.style.setProperty('--imgClose', 'url("../../resources/img/system/exitDark.png")');
 
 
@@ -104,22 +121,22 @@ function modoClaro() {
 
 $(function () {
     $('[data-toggle="tooltip"]').tooltip()
-  })
+})
 
 
 
-  const body = document.querySelector('body'),
-  sidebar = body.querySelector('nav'),
-  toggle = body.querySelector(".toggle"),
-  searchBtn = body.querySelector(".search-box"),
-  modeSwitch = body.querySelector(".toggle-switch"),
-  modeText = body.querySelector(".mode-text");
-  page = body.querySelector("#content");
+const body = document.querySelector('body'),
+    sidebar = body.querySelector('nav'),
+    toggle = body.querySelector(".toggle"),
+    searchBtn = body.querySelector(".search-box"),
+    modeSwitch = body.querySelector(".toggle-switch"),
+    modeText = body.querySelector(".mode-text");
+    page = body.querySelector("#content");
 
 
-toggle.addEventListener("click" , () =>{
-sidebar.classList.toggle("close");
-content.classList.toggle("active");
+toggle.addEventListener("click", () => {
+    sidebar.classList.toggle("close");
+    content.classList.toggle("active");
 })
 
 
