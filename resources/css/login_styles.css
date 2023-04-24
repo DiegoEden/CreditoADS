@@ -157,3 +157,51 @@ body:after {
     transition: 0.3s;
     margin-right: 10px;
 }
+
+
+
+.modal-header {
+
+    border-bottom: none;
+}
+
+.modal-footer {
+
+    border-top: none;
+}
+
+.btnVerify {
+
+    background-color: #3E5C7F;
+    color: white;
+    border-radius: 15px;
+    transition: all 0.3s;
+    padding-right: 35px;
+    padding-left: 35px;
+    padding-top: 15px;
+    padding-bottom: 15px;
+}
+
+.btnVerify:hover {
+    background-color: #052D40;
+    transition: all 0.3s;
+    color: white;
+
+}
+
+
+.inputRecovery {
+    border-radius: 20px;
+    border: 1px solid black;
+
+}
+
+.cajaCodigo {
+
+    border-radius: 10px;
+    border: 1px solid black;
+    margin: 3px;
+    height: 50px;
+    width: 40px;
+    text-align: center;
+}

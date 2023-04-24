@@ -664,3 +664,31 @@ $(document).ready(function () {
     $("#txtDui").mask("00000000-0");
     $("#txtNum").mask("0000-0000");
 });
+
+
+
+//Función para abrir cualquier modal
+function openModal(form) {
+    $(document.getElementById(form)).modal('show');
+}
+
+//Función para cerrar cualquier modal
+function closeModal(form) {
+    $(document.getElementById(form)).modal('hide');
+}
+
+
+//funcion para inputs de codigos
+function autotab(current, to, prev) {
+	if (current.getAttribute &&
+		current.value.length == current.getAttribute("maxlength")) {
+		to.focus()
+
+	} else {
+		prev.focus()
+
+
+	}
+
+
+}

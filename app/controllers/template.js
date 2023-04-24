@@ -70,8 +70,8 @@ function load() {
 
     }
 
-/*     console.log(mode);
- */
+    /*     console.log(mode);
+     */
 
 }
 
@@ -131,7 +131,7 @@ const body = document.querySelector('body'),
     searchBtn = body.querySelector(".search-box"),
     modeSwitch = body.querySelector(".toggle-switch"),
     modeText = body.querySelector(".mode-text");
-    page = body.querySelector("#content");
+page = body.querySelector("#content");
 
 
 toggle.addEventListener("click", () => {

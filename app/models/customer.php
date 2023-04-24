@@ -18,6 +18,7 @@ class Customers extends Validator
     private $dui = null;
     private $fecha_nacimiento = null;
     private $id_estado_cliente = null;
+    private $codigo = null;
 
 
     public function set_id_cliente($value)
@@ -170,6 +171,16 @@ class Customers extends Validator
         }
     }
 
+    public function set_codigo($value)
+    {
+        if ($this->validateNaturalNumber($value)) {
+            $this->codigo = $value;
+            return true;
+        } else {
+            return false;
+        }
+    }
+
     public function get_id_cliente()
     {
         return $this->id_cliente;
@@ -245,6 +256,10 @@ class Customers extends Validator
         return $this->id_estado_cliente;
     }
 
+    public function get_codigo()
+    {
+        return $this->codigo;
+    }
 
     public function cuentaExistente()
     {
@@ -353,5 +368,68 @@ class Customers extends Validator
         } else {
             return false;
         }
+    }
+
+    // Metodo para actualizar el codigo de confirmacion de un usuario
+    public function validarCorreo()
+    {
+        // Declaramos la sentencia que enviaremos a la base
+        $sql = "SELECT correo_electronico from Clientes where correo_electronico = ?";
+        // Enviamos los parametros
+        $params = array($this->correo_electronico);
+        return Database::getRow($sql, $params);
+    }
+
+    public function obtenerUsuario($correo)
+    {
+        // Creamos la sentencia SQL que contiene la consulta que mandaremos a la base
+        $sql = 'SELECT nombres,id_cliente FROM Clientes WHERE correo_electronico = ?';
+        $params = array($correo);
+        if ($data = Database::getRow($sql, $params)) {
+            $_SESSION['nombres_temp'] = $data['nombres'];
+            $_SESSION['id_cliente_temp'] = $data['id_cliente'];
+
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    // Metodo para actualizar el codigo de confirmacion de un usuario
+    public function actualizarCodigo($codigo)
+    {
+        // Declaramos la sentencia que enviaremos a la base con el parametro del nombre de la tabla (dinamico)
+        $sql = "UPDATE Clientes set codigo = ? where correo_electronico = ?";
+        // Enviamos los parametros
+        $params = array($codigo, $this->correo_electronico);
+        return Database::executeRow($sql, $params);
+    }
+
+    public function validarCodigo($id)
+    {
+        // Declaramos la sentencia que enviaremos a la base con el parametro del nombre de la tabla (dinamico)
+        $sql = "SELECT correo_electronico from Clientes where codigo = ? and id_cliente = ?";
+        // Enviamos los parametros
+        $params = array($this->codigo, $id);
+        return Database::getRow($sql, $params);
+    }
+
+    // Metodo para actualizar el codigo de confirmacion de un usuario
+    public function cleanCode($id)
+    {
+        // Declaramos la sentencia que enviaremos a la base con el parametro del nombre de la tabla (dinamico)
+        $sql = "UPDATE Clientes set codigo = null where id_cliente = ?";
+        // Enviamos los parametros
+        $params = array($id);
+        return Database::executeRow($sql, $params);
+    }
+
+    //Función para cambiar la contraseña
+    public function changePassword()
+    {
+        $hash = password_hash($this->pass, PASSWORD_DEFAULT);
+        $sql = 'UPDATE Clientes SET pass = ? WHERE id_cliente = ?';
+        $params = array($hash, $this->id_cliente);
+        return Database::executeRow($sql, $params);
     }
 }

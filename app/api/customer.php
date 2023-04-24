@@ -4,6 +4,19 @@ require_once('../helpers/validator.php');
 require_once('../models/customer.php');
 
 
+use PHPMailer\PHPMailer\PHPMailer;
+use PHPMailer\PHPMailer\SMTP;
+use PHPMailer\PHPMailer\Exception;
+
+
+
+
+require '../../libraries/phpmailer65/src/Exception.php';
+require '../../libraries/phpmailer65/src/PHPMailer.php';
+require '../../libraries/phpmailer65/src/SMTP.php';
+
+$mail = new PHPMailer(true);
+
 if (isset($_GET['action'])) {
     session_start();
     $customers = new Customers();
@@ -21,8 +34,8 @@ if (isset($_GET['action'])) {
                 break;
 
             case 'checkSession':
-                    $result['status'] = 1;
-                    $result['message'] = 'Posee una sesión activa.';
+                $result['status'] = 1;
+                $result['message'] = 'Posee una sesión activa.';
                 break;
         }
     } else {
@@ -171,6 +184,130 @@ if (isset($_GET['action'])) {
                 }
                 break;
 
+            case 'sendMail':
+                $_POST = $customers->validateForm($_POST);
+                // Generamos el codigo de seguridad 
+                $code = rand(999999, 111111);
+                if ($customers->set_correo_electronico($_POST['txtCorreoRecu'])) {
+                    if ($customers->validarCorreo()) {
+
+                        // Ejecutamos funcion para obtener el usuario del correo ingresado\
+                        $_SESSION['mail'] = $customers->get_correo_electronico();
+
+                        $customers->obtenerUsuario($_SESSION['mail']);
+
+                        try {
+
+                            //Ajustes del servidor
+                            $mail->SMTPDebug = 0;
+                            $mail->isSMTP();
+                            $mail->Host       = 'smtp.gmail.com';
+                            $mail->SMTPAuth   = true;
+                            $mail->Username   = 'asistenciacreditoads@gmail.com';
+                            $mail->Password   = 'ztbvusuzpshzcttt';
+                            $mail->SMTPSecure = 'tls';
+                            $mail->Port       = 587;
+                            $mail->CharSet = 'UTF-8';
+
+
+                            //Receptores
+                            $mail->setFrom('asistenciacreditoads@gmail.com', 'Servicios al Cliente CreditoADS');
+                            $mail->addAddress($customers->get_correo_electronico());
+
+                            //Contenido
+                            $mail->isHTML(true);
+                            $mail->Subject = 'Recuperación de contraseña';
+                            $mail->Body    = 'Hola ' . $_SESSION['nombres_temp'] . ', hemos enviado este correo para que restaures tu contraseña, tu código de seguridad es: <b>' . $code . '</b>, 
+                            si tú no haz solicitado esta acción, ignora este mensaje';
+
+                            if ($mail->send()) {
+                                $result['status'] = 1;
+                                $result['message'] = 'Código enviado correctamente,';
+                                $customers->actualizarCodigo($code);
+                            }
+                        } catch (Exception $e) {
+                            $result['exception'] = $mail->ErrorInfo;
+                        }
+                    } else {
+
+                        $result['exception'] = 'El correo ingresado no está registrado';
+                    }
+                } else {
+
+                    $result['exception'] = 'Correo incorrecto';
+                }
+
+                break;
+
+            case 'verifyCode':
+                $_POST = $customers->validateForm($_POST);
+                // Validmos el formato del mensaje que se enviara en el correo
+                if ($customers->set_codigo($_POST['codigo'])) {
+                    // Ejecutamos la funcion para validar el codigo de seguridad
+                    if ($customers->validarCodigo($_SESSION['id_cliente_temp'])) {
+                        $result['status'] = 1;
+                        // Colocamos el mensaje de exito 
+                        $result['message'] = 'El código ingresado es correcto';
+                    } else {
+                        // En caso que el correo no se envie mostramos el error
+                        $result['exception'] = 'El código ingresado no es correcto';
+                    }
+                } else {
+                    $result['exception'] = 'Mensaje incorrecto';
+                }
+                break;
+                //Caso para cambiar la contraseña
+            case 'changePass':
+                // Obtenemos el form con los inputs para obtener los datos
+                $_POST = $customers->validateForm($_POST);
+                if ($customers->set_id_cliente($_SESSION['id_cliente_temp'])) {
+                    if ($customers->set_pass($_POST['txtNewPass'])) {
+                        // Ejecutamos la funcion para actualizar al usuario
+                        if ($customers->changePassword()) {
+
+                            try {
+
+                                //Ajustes del servidor
+                                $mail->SMTPDebug = 0;
+                                $mail->isSMTP();
+                                $mail->Host       = 'smtp.gmail.com';
+                                $mail->SMTPAuth   = true;
+                                $mail->Username   = 'asistenciacreditoads@gmail.com';
+                                $mail->Password   = 'ztbvusuzpshzcttt';
+                                $mail->SMTPSecure = 'tls';
+                                $mail->Port       = 587;
+                                $mail->CharSet = 'UTF-8';
+
+
+                                //Receptores
+                                $mail->setFrom('asistenciacreditoads@gmail.com', 'Servicios al Cliente CreditoADS');
+                                $mail->addAddress($_SESSION['mail']);
+
+                                //Contenido
+                                $mail->isHTML(true);
+                                $mail->Subject = 'Alerta de seguridad | CreditoADS';
+                                $mail->Body    = 'Hola ' . $_SESSION['nombres_temp'] . ', Se cambió la contraseña de tu cuenta. Si no fuiste tú, comunicarse con el equipo de seguridad CreditoADS';
+
+                                $mail->send();
+                            } catch (Exception $e) {
+                                $result['exception'] = $mail->ErrorInfo;
+                            }
+                            $result['status'] = 1;
+                            $result['message'] = 'Clave actualizada correctamente';
+
+                            $customers->cleanCode($_SESSION['id_cliente_temp']);
+                            unset($_SESSION['id_cliente_temp']);
+                            unset($_SESSION['mail']);
+                        } else {
+                            $result['exception'] = Database::getException();
+                        }
+                    } else {
+                        $result['exception'] = $usuarios->getPasswordError();
+                    }
+                } else {
+                    $result['exception'] = 'Correo incorrecto';
+                }
+                break;
 
             default:
                 $result['exception'] = 'Acción no disponible dentro de la sesión';

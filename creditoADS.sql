@@ -125,3 +125,7 @@ id_pago INT IDENTITY (1, 1) not null primary key,
 );
 
 
+--cambios 23 de abril --
+
+alter table Clientes add codigo int
+
