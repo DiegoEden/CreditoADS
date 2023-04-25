@@ -23,6 +23,7 @@ class Customer_page
             <link rel="icon" type="image/png" href="../../resources/img/system/logo.png">
             <link href="https://unpkg.com/boxicons@2.1.1/css/boxicons.min.css" rel="stylesheet">
             <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,0,0" />
+            <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@48,400,1,0" />
             <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-gH2yIJqKdNHPEq0n4Mqa/HGKIhSkIHeL5AyhkYV8i59U5AR6csBvApHHNl/vI1Bx" crossorigin="anonymous">
             <link rel="stylesheet" type="text/css" href="../../resources/css/customer_styles.css">
             
@@ -111,7 +112,7 @@ class Customer_page
                     </li>
 
                     <li class="">
-                        <a style="cursor:pointer" data-bs-toggle="modal" data-bs-target="#modalProfile">
+                        <a style="cursor:pointer" class="buttonMenu" href="settings.php">
                             <i class="bx bx-cog icon"></i>
                             <span class="text nav-text">Configuración</span>
                         </a>
@@ -137,7 +138,7 @@ class Customer_page
                     <li><a class="dropdown-item" onclick="logOut()">Cerrar sesión</a></li>
                     <li><a class="dropdown-item" id="modoClaro2" onclick="modoClaro()">Modo Claro</a></li>
                     <li><a class="dropdown-item" id="modoOscuro2" onclick="modoOscuro()">Modo Oscuro</a></li>
-                    <li><a class="dropdown-item" data-bs-toggle="modal" data-bs-target="#modalProfile">Configuración</a></li>
+                    <li><a class="dropdown-item" href="settings.php">Configuración</a></li>
                 </ul>
             </div>
                 <a href="dashboard.php" class="mobileButton">
@@ -191,22 +192,7 @@ class Customer_page
     {
         print('
                         
-            <!-- Modal -->
-            <div class="modal fade" id="modalProfile" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-            <div class="modal-dialog modal-dialog-centered  modal-lg">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h1 class="modal-title fs-5">Ajustes de la cuenta</h1>
-                        <button type="button" class="btn-close closeModalButton" data-bs-dismiss="modal" aria-label="Close"></button>
-                    </div>
-                    <div class="modal-body">
-
-                    </div>
-                
-                </div>
-            </div>
-            </div>
-               
+        
 
                 <script src="../../app/controllers/customer/' . $controller . '"></script>
                 <script src="../../app/controllers/customer/account.js"></script>

@@ -173,7 +173,7 @@ class Customers extends Validator
 
     public function set_codigo($value)
     {
-        if ($this->validateNaturalNumber($value)) {
+        if ($this->validateText($value)) {
             $this->codigo = $value;
             return true;
         } else {
@@ -396,22 +396,29 @@ class Customers extends Validator
     }
 
     // Metodo para actualizar el codigo de confirmacion de un usuario
-    public function actualizarCodigo($codigo)
+    public function actualizarCodigo()
     {
+        $bcrypt = password_hash($this->codigo, PASSWORD_BCRYPT);
+
         // Declaramos la sentencia que enviaremos a la base con el parametro del nombre de la tabla (dinamico)
         $sql = "UPDATE Clientes set codigo = ? where correo_electronico = ?";
         // Enviamos los parametros
-        $params = array($codigo, $this->correo_electronico);
+        $params = array($bcrypt, $this->correo_electronico);
         return Database::executeRow($sql, $params);
     }
 
-    public function validarCodigo($id)
+    public function validarCodigo($code, $id)
     {
         // Declaramos la sentencia que enviaremos a la base con el parametro del nombre de la tabla (dinamico)
-        $sql = "SELECT correo_electronico from Clientes where codigo = ? and id_cliente = ?";
+        $sql = "SELECT correo_electronico, codigo from Clientes where id_cliente = ?";
         // Enviamos los parametros
-        $params = array($this->codigo, $id);
-        return Database::getRow($sql, $params);
+        $params = array($id);
+        $data = Database::getRow($sql, $params);
+        if (password_verify($code, $data['codigo'])) {
+            return true;
+        } else {
+            return false;
+        }
     }
 
     // Metodo para actualizar el codigo de confirmacion de un usuario

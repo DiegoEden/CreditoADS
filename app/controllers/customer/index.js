@@ -156,6 +156,9 @@ document.getElementById('checkCode-form').addEventListener('submit', function (e
 //Función para cambiar clave
 document.getElementById('update-form').addEventListener('submit', function (event) {
 	//Se evita que se recargue la pagina
+	const boton2 = document.getElementById('btnSubmit');
+	boton2.disabled = true;
+
 	event.preventDefault();
 
 	// Realizamos peticion a la API de clientes con el caso changePass y method post para dar acceso al valor de los campos del form
@@ -167,13 +170,18 @@ document.getElementById('update-form').addEventListener('submit', function (even
 		if (request.ok) {
 			request.json().then(function (response) {
 				// Se comprueba si la respuesta es satisfactoria, de lo contrario se muestra un mensaje con la excepción.
+				const input = document.getElementById('txtNewPass');
+				input.disabled = true;
 				if (response.status) {
 					// En caso de iniciar sesion correctamente mostrar mensaje y redirigir al menu
 					closeModal('cambiarContraseña');
-					sweetAlert(1, response.message, 'index.php');
-
+					sweetAlert(1, response.message, null);
+					boton2.disabled = false;
+					input.disabled = false;
 				} else {
 					sweetAlert(3, response.exception, null);
+					boton2.disabled = false;
+					input.disabled = false;
 				}
 			});
 		} else {

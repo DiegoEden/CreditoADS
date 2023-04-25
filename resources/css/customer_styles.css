@@ -159,12 +159,12 @@ h6 {
         text-align: center;
     }
 
- 
+
 }
 
 
-@media(max-width: 339px){
-    .mobileButton{
+@media(max-width: 339px) {
+    .mobileButton {
         font-size: 25px !important;
     }
 }
@@ -626,7 +626,7 @@ body.dark .home .text {
     transition: var(--tran-05);
 }
 
-.mobileNav{
+.mobileNav {
 
     background-color: var(--colorContainer);
     transition: var(--animation);
@@ -652,7 +652,7 @@ body.dark .home .text {
 
 .show {
 
-    color: var(--primary-color) !important;
+    color: var(--colorLetra) !important;
 }
 
 .dropdown-menu {
@@ -661,8 +661,80 @@ body.dark .home .text {
 
 }
 
-.dropdown-item{
+.dropdown-item {
 
     color: var(--colorLetra);
 
+}
+
+
+.titulosAjustes {
+    font-size: 16px;
+    color: var(--colorLetra);
+    letter-spacing: 2px;
+    text-align: center;
+}
+
+.informacionPersonal {
+
+    margin-top: 3px;
+    border-radius: 10px;
+    background-color: var(--colorContainer);
+    padding: 30px;
+    transition: var(--tran-05);
+    width: 500px;
+}
+
+.tituloInformacion {
+    font-size: 13px;
+    font-weight: 700;
+    color: var(--colorLetra) !important;
+}
+
+.informacion {
+    font-size: 13px;
+    color: var(--colorLetra) !important;
+}
+
+.botonesAjustes {
+
+    color: white;
+    background-color: #3E5C7F;
+    transition: var(--tran-03);
+    padding-bottom: 10px;
+    border: none;
+    padding-left: 20px;
+    padding-right: 20px;
+    font-size: 14px
+}
+
+.botonesAjustes:hover {
+    background-color: #052D40;
+    transition: var(--tran-03);
+    color: white;
+
+}
+
+.divColumnasAjustes {
+    max-width: 190px;
+}
+
+::-webkit-scrollbar {
+    width: 7px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+    background: #f1f1f1;
+    
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+    background: #3E5C7F;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+    background: #052D40;
 }

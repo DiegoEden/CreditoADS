@@ -84,7 +84,7 @@
                             <form autocomplete="off" action="/form" id="checkMail-form">
                                 <div class="d-flex justify-content-center align-items-center mb-2">
                                     <div class="alert alert-warning alert-dismissible fade show" role="alert" style="font-size: 14px;">
-                                        <strong>Importante.</strong> Ingresa tu correo electrónico para poder recuperar
+                                        <strong>Importante.</strong> Ingresa tu correo electrónico para poder restaurar
                                         tu contraseña. <br>
                                     </div>
                                 </div>
@@ -216,7 +216,7 @@
                                     </div>
                                 </div>
                                 <div class="d-flex justify-content-center align-items-center">
-                                    <button type="submit" class="btn btnVerify mr-2"></span>Finalizar
+                                    <button type="submit" id="btnSubmit" name="btnSubmit" class="btn btnVerify mr-2"></span>Finalizar
                                     </button>
 
                                 </div>

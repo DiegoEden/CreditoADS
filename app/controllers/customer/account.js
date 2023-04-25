@@ -5,7 +5,7 @@ const API = '../../app/api/customer.php?action=';
 function logOut() {
     swal({
         title: 'Advertencia',
-        text: 'Desea cerrar la sesión?',
+        text: '¿Desea cerrar la sesión?',
         icon: 'warning',
         buttons: ['No', 'Sí'],
         closeOnClickOutside: false,

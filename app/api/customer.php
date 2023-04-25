@@ -190,7 +190,7 @@ if (isset($_GET['action'])) {
                 $code = rand(999999, 111111);
                 if ($customers->set_correo_electronico($_POST['txtCorreoRecu'])) {
                     if ($customers->validarCorreo()) {
-
+                        $customers->set_codigo($code);
                         // Ejecutamos funcion para obtener el usuario del correo ingresado\
                         $_SESSION['mail'] = $customers->get_correo_electronico();
 
@@ -204,7 +204,7 @@ if (isset($_GET['action'])) {
                             $mail->Host       = 'smtp.gmail.com';
                             $mail->SMTPAuth   = true;
                             $mail->Username   = 'asistenciacreditoads@gmail.com';
-                            $mail->Password   = 'ztbvusuzpshzcttt';
+                            $mail->Password   = 'lraikofhngsxoyaf';
                             $mail->SMTPSecure = 'tls';
                             $mail->Port       = 587;
                             $mail->CharSet = 'UTF-8';
@@ -216,14 +216,14 @@ if (isset($_GET['action'])) {
 
                             //Contenido
                             $mail->isHTML(true);
-                            $mail->Subject = 'Recuperación de contraseña';
+                            $mail->Subject = 'Recuperación de contraseña | CreditoADS';
                             $mail->Body    = 'Hola ' . $_SESSION['nombres_temp'] . ', hemos enviado este correo para que restaures tu contraseña, tu código de seguridad es: <b>' . $code . '</b>, 
                             si tú no haz solicitado esta acción, ignora este mensaje';
 
                             if ($mail->send()) {
                                 $result['status'] = 1;
                                 $result['message'] = 'Código enviado correctamente,';
-                                $customers->actualizarCodigo($code);
+                                $customers->actualizarCodigo();
                             }
                         } catch (Exception $e) {
                             $result['exception'] = $mail->ErrorInfo;
@@ -244,7 +244,7 @@ if (isset($_GET['action'])) {
                 // Validmos el formato del mensaje que se enviara en el correo
                 if ($customers->set_codigo($_POST['codigo'])) {
                     // Ejecutamos la funcion para validar el codigo de seguridad
-                    if ($customers->validarCodigo($_SESSION['id_cliente_temp'])) {
+                    if ($customers->validarCodigo($_POST['codigo'], $_SESSION['id_cliente_temp'])) {
                         $result['status'] = 1;
                         // Colocamos el mensaje de exito 
                         $result['message'] = 'El código ingresado es correcto';
@@ -273,7 +273,7 @@ if (isset($_GET['action'])) {
                                 $mail->Host       = 'smtp.gmail.com';
                                 $mail->SMTPAuth   = true;
                                 $mail->Username   = 'asistenciacreditoads@gmail.com';
-                                $mail->Password   = 'ztbvusuzpshzcttt';
+                                $mail->Password   = 'lraikofhngsxoyaf';
                                 $mail->SMTPSecure = 'tls';
                                 $mail->Port       = 587;
                                 $mail->CharSet = 'UTF-8';
@@ -298,6 +298,7 @@ if (isset($_GET['action'])) {
                             $customers->cleanCode($_SESSION['id_cliente_temp']);
                             unset($_SESSION['id_cliente_temp']);
                             unset($_SESSION['mail']);
+                            unset($_SESSION['nombre_temp']);
                         } else {
                             $result['exception'] = Database::getException();
                         }
