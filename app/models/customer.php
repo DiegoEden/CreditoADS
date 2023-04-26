@@ -449,4 +449,12 @@ class Customers extends Validator
         $params = array($this->id_cliente);
         return Database::executeRow($sql, $params);
     }
+
+    public function checkBlockedUsers()
+    {
+        $sql = "SELECT * from Clientes where id_cliente = ? AND id_estado_cliente=3";
+        // Enviamos los parametros
+        $params = array($this->id_cliente);
+        return Database::getRow($sql, $params);
+    }
 }

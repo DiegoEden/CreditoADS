@@ -40,6 +40,149 @@ if (isset($_GET['action'])) {
                 $result['message'] = 'Posee una sesión activa.';
                 break;
 
+            case 'checkBlockedUsers':
+
+                if ($customers->set_id_cliente($_SESSION['id_cliente'])) {
+                    if ($customers->checkBlockedUsers()) {
+                        $result['status'] = 1;
+                        $result['message'] = 'El usuario se encuentra bloqueado.';
+
+                        unset($_SESSION['id_cliente']);
+                    }
+                }
+
+                break;
+
+            case 'verifyCode':
+                $_POST = $customers->validateForm($_POST);
+                // Validmos el formato del mensaje que se enviara en el correo
+                if ($customers->set_codigo($_POST['codigo'])) {
+                    // Ejecutamos la funcion para validar el codigo de seguridad
+                    if ($customers->validarCodigo($_POST['codigo'], $_SESSION['id_cliente'])) {
+                        $result['status'] = 1;
+                        // Colocamos el mensaje de exito 
+                        $result['message'] = 'El código ingresado es correcto';
+                    } else {
+                        // En caso que el correo no se envie mostramos el error
+                        $result['exception'] = 'El código ingresado no es correcto';
+                    }
+                } else {
+                    $result['exception'] = 'Mensaje incorrecto';
+                }
+                break;
+
+            case 'changePassword':
+                $_POST = $customers->validateForm($_POST);
+                if ($customers->set_id_cliente($_SESSION['id_cliente'])) {
+                    if ($customers->checkPassword($_POST['txtOldPass'])) {
+                        if ($customers->set_pass($_POST['txtNewPass'])) {
+                            if ($customers->changePassword()) {
+                                try {
+
+                                    $body = $mailFormat->printMailFormatNotification('notificationPasswordChange', $_SESSION['nombres']);
+
+                                    //Ajustes del servidor
+                                    $mail->SMTPDebug = 0;
+                                    $mail->isSMTP();
+                                    $mail->Host       = 'smtp.gmail.com';
+                                    $mail->SMTPAuth   = true;
+                                    $mail->Username   = 'asistenciacreditoads@gmail.com';
+                                    $mail->Password   = 'lraikofhngsxoyaf';
+                                    $mail->SMTPSecure = 'tls';
+                                    $mail->Port       = 587;
+                                    $mail->CharSet = 'UTF-8';
+
+
+                                    //Receptores
+                                    $mail->setFrom('asistenciacreditoads@gmail.com', 'Servicios al Cliente CreditoADS');
+                                    $mail->addAddress($_SESSION['correo']);
+
+                                    //Contenido
+                                    $mail->isHTML(true);
+                                    $mail->Subject = 'Alerta de seguridad | CreditoADS';
+                                    $mail->Body    = $body;
+
+                                    $mail->send();
+                                } catch (Exception $e) {
+                                    $result['exception'] = $mail->ErrorInfo;
+                                }
+
+
+                                $customers->cleanCode($_SESSION['id_cliente']);
+                                $result['status'] = 1;
+                                $result['message'] = 'Contraseña actualizada correctamente.';
+
+                                unset($_SESSION['id_cliente']);
+                            } else {
+                                $result['exception'] = Database::getException();
+                            }
+                        } else {
+                            $result['exception'] = 'El formato de la contraseña es incorrecto';
+                        }
+                    } else {
+                        $result['exception'] = 'La contraseña ingresada es incorrecta';
+                    }
+                } else {
+                    $result['exception'] = 'Usted no ha iniciado sesión';
+                }
+
+                break;
+
+
+            case 'blockMyAccount':
+
+                $_POST = $customers->validateForm($_POST);
+                if ($customers->set_id_cliente($_SESSION['id_cliente'])) {
+                    if ($customers->checkPassword($_POST['txtPass'])) {
+                        if ($customers->blockAccount()) {
+                            try {
+
+                                $body = $mailFormat->printMailFormatNotification('notificationBlockedAccount', $_SESSION['nombres']);
+
+                                //Ajustes del servidor
+                                $mail->SMTPDebug = 0;
+                                $mail->isSMTP();
+                                $mail->Host       = 'smtp.gmail.com';
+                                $mail->SMTPAuth   = true;
+                                $mail->Username   = 'asistenciacreditoads@gmail.com';
+                                $mail->Password   = 'lraikofhngsxoyaf';
+                                $mail->SMTPSecure = 'tls';
+                                $mail->Port       = 587;
+                                $mail->CharSet = 'UTF-8';
+
+
+                                //Receptores
+                                $mail->setFrom('asistenciacreditoads@gmail.com', 'Servicios al Cliente CreditoADS');
+                                $mail->addAddress($_SESSION['correo']);
+
+                                //Contenido
+                                $mail->isHTML(true);
+                                $mail->Subject = 'Alerta de seguridad | CreditoADS';
+                                $mail->Body = $body;
+
+                                $mail->send();
+                            } catch (Exception $e) {
+                                $result['exception'] = $mail->ErrorInfo;
+                            }
+
+
+                            $customers->cleanCode($_SESSION['id_cliente']);
+                            $result['status'] = 1;
+                            $result['message'] = 'Se ha bloqueado su cuenta.';
+
+                            unset($_SESSION['id_cliente']);
+                        } else {
+                            $result['exception'] = Database::getException();
+                        }
+                    } else {
+                        $result['exception'] = 'La contraseña ingresada es incorrecta';
+                    }
+                } else {
+                    $result['exception'] = 'Usted no ha iniciado sesión';
+                }
+
+                break;
+
             case 'sendMailPass':
                 // Generamos el codigo de seguridad 
                 $code = rand(999999, 111111);

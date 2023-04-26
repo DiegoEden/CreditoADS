@@ -190,7 +190,7 @@ class Customer_page
 
     public static function footerTemplate($controller)
     {
-        print ( '
+        print('
         
         <!-- Modal para verificar el codigo de verificación -->
         <div class="modal fade" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" id="verificarCodigo" tabindex="-1" aria-hidden="true">
@@ -242,6 +242,108 @@ class Customer_page
             </div>
         </div>
         <!-- Fin del Modal -->
+
+
+        <!-- Modal -->
+        <div class="modal fade" id="cambiarContraseña" tabindex="-1" aria-labelledby="cambiarContraseña" aria-hidden="true">
+            <div class="modal-dialog  modal-xl modal-dialog-centered  modal-lg">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <span class="material-symbols-rounded">
+                            info
+                        </span>
+                        <h1 style="margin-left: 10px;" class="modal-title fs-5">Restaurar contraseña</h1>
+                        <button type="button" class="btn-close closeModalButton" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="row">
+                            <div class="col-xl-12 col-md-12 col-sm-12 col-xs-12 d-flex justify-content-center flex-column">
+                                <form autocomplete="off" action="/form" id="update-pass">
+                                    <div class="d-flex justify-content-center align-items-center mb-2">
+                                        <div class="alert alert-warning alert-dismissible fade show" role="alert" style="font-size: 14px; color:black !important">
+                                            <strong>Importante.</strong> Tu contraseña debe de cumplir con los siguientes
+                                            requisitos: <br>
+                                            <br>
+                                            - Mínimo 8 caracteres <br>
+                                            - Máximo 50 caracteres<br>
+                                            - Al menos una letra mayúscula <br>
+                                            - Al menos una letra minúscula <br>
+                                            - Al menos un dígito <br>
+                                            - No espacios en blanco <br>
+                                            - Al menos 1 carácter especial
+    
+                                            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    
+                                        </div>
+                                    </div>
+                                    <div class="d-flex justify-content-center align-items-center mb-2">
+                                        <!-- Input Correo -->
+                                        <div class="form-group mb-4" style="width: 300px;" id="divPass">
+                                            
+    
+                                        </div>
+                                    </div>
+                                    <div class="d-flex justify-content-center align-items-center">
+                                        <button type="submit" id="btnChangePass"  name="btnChangePass" class="btn btnVerify mr-2"></span>Cambiar contraseña
+                                        </button>
+    
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+    
+                    </div>
+    
+                </div>
+            </div>
+        </div>
+
+
+        <!-- Modal -->
+        <div class="modal fade" id="bloquearUsuario" tabindex="-1" aria-labelledby="bloquearUsuario" aria-hidden="true">
+            <div class="modal-dialog  modal-xl modal-dialog-centered  modal-lg">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <span class="material-symbols-rounded">
+                            info
+                        </span>
+                        <h1 style="margin-left: 10px;" class="modal-title fs-5">Bloquear cuenta</h1>
+                        <button type="button" class="btn-close closeModalButton" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="row">
+                            <div class="col-xl-12 col-md-12 col-sm-12 col-xs-12 d-flex justify-content-center flex-column">
+                                <form autocomplete="off" action="/form" id="block-account">
+                                    <div class="d-flex justify-content-center align-items-center mb-2">
+                                        <div class="alert alert-warning alert-dismissible fade show" role="alert" style="font-size: 14px; color:black !important">
+                                            <strong>Importante.</strong> Si bloqueas tu cuenta, nadie tendrá acceso a la misma.
+                                            
+                                            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    
+                                        </div>
+                                    </div>
+                                    <div class="d-flex justify-content-center align-items-center mb-2">
+                                        <!-- Input Correo -->
+                                        <div class="form-group mb-4" style="width: 300px;" id="divPass2">
+                                            
+                                        </div>
+                                    </div>
+                                    <div class="d-flex justify-content-center align-items-center">
+                                        <button type="submit" id="btnBlockUser"  name="btnBlockUser" class="btn btnVerify mr-2"></span>Bloquear mi cuenta
+                                        </button>
+    
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+    
+                    </div>
+    
+                </div>
+            </div>
+        </div>
+    
+
         ');
 
         print('

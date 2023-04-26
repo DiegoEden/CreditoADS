@@ -190,7 +190,7 @@
                                         requisitos: <br>
                                         <br>
                                         - Mínimo 8 caracteres <br>
-                                        - Máximo 50 <br>
+                                        - Máximo 50 caracteres<br>
                                         - Al menos una letra mayúscula <br>
                                         - Al menos una letra minúscula <br>
                                         - Al menos un dígito <br>

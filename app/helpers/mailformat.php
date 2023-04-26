@@ -3,13 +3,13 @@
 class Mailformat
 {
 
-    public function printMailFormatNotification($mailType, $name)
-    {
+  public function printMailFormatNotification($mailType, $name)
+  {
 
-        switch ($mailType) {
-            case 'notificationPasswordChange':
+    switch ($mailType) {
+      case 'notificationPasswordChange':
 
-                $body = "<html>                                                 
+        $body = "<html>                                                 
                                 <body>
                                 <table width='100%'>
                                   <div style='background: url(https://i.ibb.co/bNb5CXs/fondo-Correo.png); '>
@@ -37,7 +37,7 @@ class Mailformat
                                         </h1>
                                       </div>";
 
-                $body .= "
+        $body .= "
     
                                 
                               <div style='text-align: center;'>
@@ -52,7 +52,7 @@ class Mailformat
                       
                                   '
                                 >
-                                Hola $name, Se cambió la contraseña de tu cuenta. Si no fuiste tú, comunicarse con el equipo de seguridad CreditoADS.     
+                                Hola $name, se cambió la contraseña de tu cuenta. Si no fuiste tú, comunicarse con el equipo de seguridad CreditoADS.     
                                                  </p>
                               </div>
                                                        
@@ -61,7 +61,7 @@ class Mailformat
                                 
                                 ";
 
-                $body .= "
+        $body .= "
                                 
                               
                                     <div style='text-align: center; margin-bottom: 30px;'>
@@ -108,20 +108,126 @@ class Mailformat
                             </html>
                                 ";
 
-                return $body;
+        return $body;
 
-                break;
-        }
+        break;
+
+
+      case 'notificationBlockedAccount':
+
+        $body = "<html>                                                 
+                                  <body>
+                                  <table width='100%'>
+                                    <div style='background: url(https://i.ibb.co/bNb5CXs/fondo-Correo.png); '>
+                                      <div style='text-align:center; '>
+                                        <div style='text-align: center;'>
+                                          <img
+                                            src='https://i.ibb.co/YBGRpL6/logo.png'
+                                            alt=''
+                                            width='150'
+                                            height='150'
+                                            style='margin-top: 25px; margin-bottom: -10px'
+                                          />
+                                        </div>
+                                        <div style='text-align: center;'>
+                                          <h1
+                                            style='
+                                              color: black;
+                                              font-style: normal;
+                                              font-weight: 700;
+                                              font-size: 18px;
+                                              margin-bottom: 30px;
+                                            '
+                                          >
+                                            Estimado Cliente:
+                                          </h1>
+                                        </div>";
+
+        $body .= "
+      
+                                  
+                                <div style='text-align: center;'>
+                                <p
+                                    style='
+                                      font-style: normal;
+                                      font-weight: 400;
+                                      font-size: 14px;
+                                      color: black;
+                                      margin-bottom: 35px;
+                                      text-align: center;
+                        
+                                    '
+                                  >
+                                  Hola $name, se ha bloqueado tu cuenta. Si no fuiste tú, comunicarse con el equipo de seguridad CreditoADS.     
+                                                   </p>
+                                </div>
+                                                         
+                                </div>
+                        
+                                  
+                                  ";
+
+        $body .= "
+                                  
+                                
+                                      <div style='text-align: center; margin-bottom: 30px;'>
+      
+                                       <footer style='background: transparent; text-align: center; margin-top:35px;
+                                       border-top: 2px solid #6B7EFD;'>
+                                          <h1
+                                          style='
+                                              font-style: normal;
+                                              font-weight: 500;
+                                              font-size: 14px;
+                                              line-height: 21px;
+                                              letter-spacing: 0.2em;
+                                              text-transform: uppercase;
+      
+                                              color: black;
+                                          '
+                                          >CREDITO ADS
+                                          </h1>
+                                      </footer>
+                                      </div>
+                                      <div style='text-align: center; margin-bottom: 30px;'>
+      
+                                      <footer style='background: transparent; text-align: center; margin-top:35px'>
+                                      <h1
+                                      style='
+                                          font-style: normal;
+                                          font-weight: 500;
+                                          font-size: 14px;
+                                          line-height: 21px;
+                                          letter-spacing: 0.2em;
+                                          text-transform: uppercase;
+      
+                                          color: transparent;
+                                      '
+                                      >CREDITOADS
+                                      </h1>
+                                  </footer>
+                                      </div>
+                                  </div>
+                                  </div>
+                                  </table>
+                              </body>
+                              </html>
+                                  ";
+
+        return $body;
+
+        break;
     }
+  }
 
-    public function printMailFormatCode($mailType, $code, $name)
-    {
+  public function printMailFormatCode($mailType, $code, $name)
+  {
 
-        switch ($mailType) {
+    switch ($mailType) {
 
-            case 'passwordCode':
+      case 'passwordCode':
 
-                $body = "<html>                                                 
+        $body = "<html>                                                 
                 <body>
                 <table width='100%'>
                   <div style='background: url(https://i.ibb.co/bNb5CXs/fondo-Correo.png); '>
@@ -149,7 +255,7 @@ class Mailformat
                         </h1>
                       </div>";
 
-                $body .= "
+        $body .= "
 
                 
               <div style='text-align: center;'>
@@ -213,7 +319,7 @@ class Mailformat
                 
                 ";
 
-                $body .= "
+        $body .= "
                 
               
                     <div style='text-align: center; margin-bottom: 30px;'>
@@ -260,15 +366,15 @@ class Mailformat
             </html>
                 ";
 
-                return $body;
+        return $body;
 
 
-                break;
+        break;
 
-            case 'blockAccount':
+      case 'blockAccount':
 
 
-                $body = "<html>                                                 
+        $body = "<html>                                                 
                     <body>
                     <table width='100%'>
                       <div style='background: url(https://i.ibb.co/bNb5CXs/fondo-Correo.png); '>
@@ -296,7 +402,7 @@ class Mailformat
                             </h1>
                           </div>";
 
-                $body .= "
+        $body .= "
 
                     
                   <div style='text-align: center;'>
@@ -360,7 +466,7 @@ class Mailformat
                     
                     ";
 
-                $body .= "
+        $body .= "
                     
                   
                         <div style='text-align: center; margin-bottom: 30px;'>
@@ -407,9 +513,9 @@ class Mailformat
                 </html>
                     ";
 
-                return $body;
+        return $body;
 
-                break;
-        }
+        break;
     }
+  }
 }

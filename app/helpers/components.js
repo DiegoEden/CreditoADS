@@ -232,6 +232,38 @@ function saveRow(api, action, form, route) {
     });
 }
 
+function checkCode(api, action, form, closemodal, openmodal) {
+    var uno = document.getElementById('1').value;
+    var dos = document.getElementById('2').value;
+    var tres = document.getElementById('3').value;
+    var cuatro = document.getElementById('4').value;
+    var cinco = document.getElementById('5').value;
+    var seis = document.getElementById('6').value;
+    document.getElementById('codigo').value = uno + dos + tres + cuatro + cinco + seis;
+
+    fetch(api + action, {
+        method: 'post',
+        body: new FormData(document.getElementById(form))
+    }).then(function (request) {
+        // Se verifica si la petición es correcta, de lo contrario se muestra un mensaje indicando el problema.
+        if (request.ok) {
+            request.json().then(function (response) {
+                // Se comprueba si la respuesta es satisfactoria, de lo contrario se muestra un mensaje con la excepción.
+                if (response.status) {
+                    closeModal(closemodal);
+                    openModal(openmodal);
+                } else {
+                    sweetAlert(2, response.exception, null);
+                }
+            });
+        } else {
+            console.log(request.status + ' ' + request.statusText);
+        }
+    }).catch(function (error) {
+        console.log(error);
+    });
+}
+
 //Función para redireccionar según permisos
 function checkPermissions(pagina) {
     // Se define un objeto con los datos del registro seleccionado.

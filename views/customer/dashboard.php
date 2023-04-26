@@ -14,6 +14,8 @@ Customer_page::SideBarTemplate('CreditoADS | Dashboard')
     Customer_page::welcomeMessage();
     ?>
 
+    
+
 
 
 </div>

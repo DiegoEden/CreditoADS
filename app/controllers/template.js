@@ -130,13 +130,13 @@ const body = document.querySelector('body'),
     toggle = body.querySelector(".toggle"),
     searchBtn = body.querySelector(".search-box"),
     modeSwitch = body.querySelector(".toggle-switch"),
-    modeText = body.querySelector(".mode-text");
-page = body.querySelector("#content");
+    modeText = body.querySelector(".mode-text"),
+    page = body.querySelector("#content")
 
 
 toggle.addEventListener("click", () => {
     sidebar.classList.toggle("close");
-    content.classList.toggle("active");
+    page.classList.toggle("active");
 })
 
 

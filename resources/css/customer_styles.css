@@ -91,19 +91,6 @@ label {
 }
 
 
-.btnPass {
-
-    position: absolute;
-    right: 0;
-    top: 50%;
-    transform: translateY(-50%);
-    background-color: transparent;
-    border: none;
-    color: var(--colorLetra);
-    padding-top: 8px;
-    transition: 0.3s;
-    margin-right: 5px;
-}
 
 h1,
 h2,
@@ -631,7 +618,7 @@ body.dark .home .text {
 .mobileNav {
 
     background-color: var(--colorContainer);
-    transition: var(--animation);
+    transition: var(--tran-05);
     border-top-right-radius: 15px;
     border-top-left-radius: 15px;
 
@@ -784,16 +771,61 @@ body.dark .home .text {
 }
 
 .cajaCodigo:focus {
-    
+
     color: var(--colorLetra);
     background-color: var(--body-color);
     transition: var(--tran-05);
-    
+
 
 }
 
 
-.cajaCodigo:hover{
+.cajaCodigo:hover {
     background-color: var(--colorContainer);
 
+}
+
+.inputRecovery {
+    border-radius: 20px;
+    border: 1px solid var(--colorLetra);
+    background-color: var(--body-color);
+    color: var(--colorLetra);
+    transition: var(--tran-05);
+
+
+}
+
+.inputRecovery:focus {
+
+    color: var(--colorLetra);
+    background-color: var(--body-color);
+    transition: var(--tran-05);
+
+
+}
+
+
+.inputRecovery:hover {
+    background-color: var(--colorContainer);
+    transition: var(--tran-05);
+
+
+}
+
+.btnPass {
+
+    position: absolute;
+    right: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    background-color: transparent;
+    border: none;
+    color: var(--colorLetra);
+    transition: 0.3s;
+    margin-right: 5px;
+}
+
+.spanPass{
+
+    font-size: 25px;
 }

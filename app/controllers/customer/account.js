@@ -45,6 +45,7 @@ document.getElementById('btnBlock').addEventListener('click', function (event) {
 
 
     const button = document.getElementById('btnBlock');
+    const button2 = document.getElementById('btnPass');
     const title = document.getElementById('titleModal');
     const alert = document.getElementById('alertModal')
     const action = document.getElementById('accion');
@@ -56,6 +57,7 @@ document.getElementById('btnBlock').addEventListener('click', function (event) {
     action.value = 'bloquear';
 
     button.disabled = true;
+    button2.disabled = true;
 
 
     //Se envia correo con codigo
@@ -68,6 +70,8 @@ document.getElementById('btnBlock').addEventListener('click', function (event) {
                     //Se verifica si la respuesta no es correcta para redireccionar al primer uso
                     if (response.status) {
                         button.disabled = false;
+                        button2.disabled = false;
+
                         openModal("verificarCodigo");
                         closeModal("modalProfile");
 
@@ -90,6 +94,7 @@ document.getElementById('btnPass').addEventListener('click', function (event) {
 
 
     const button = document.getElementById('btnPass');
+    const button2 = document.getElementById('btnBlock');
     const title = document.getElementById('titleModal');
     const alert = document.getElementById('alertModal')
     const action = document.getElementById('accion');
@@ -100,6 +105,7 @@ document.getElementById('btnPass').addEventListener('click', function (event) {
     action.value = 'restaurar';
 
     button.disabled = true;
+    button2.disabled = true;
 
     //Se envia correo con codigo
     fetch(API + 'sendMailPass')
@@ -111,6 +117,8 @@ document.getElementById('btnPass').addEventListener('click', function (event) {
                     //Se verifica si la respuesta no es correcta para redireccionar al primer uso
                     if (response.status) {
                         button.disabled = false;
+                        button2.disabled = false;
+
                         openModal("verificarCodigo");
                         closeModal("modalProfile");
 
@@ -141,9 +149,67 @@ function cargarInputs() {
 
 
     document.getElementById('divCodigo').innerHTML = content;
+
+
+    content2 = `
+    
+    <h6 class="fs-6">Ingresa tu contraseña actual:</h6>
+    <div style="position: relative;" >
+        <input type="password" autocomplete="off" class="form-control inputRecovery" id="txtOldPass" name="txtOldPass" Required>
+        <button type="button" class="btnPass" onclick="togglePassword('txtOldPass', 'Pass1')"><span id="Pass1" class="material-symbols-outlined spanPass">
+                visibility
+        </span></button>
+    </div>
+
+    <br>
+
+    <h6 class="fs-6">Ingresa tu nueva contraseña:</h6>
+    <div style="position: relative;" >
+        <input type="password" autocomplete="off" class="form-control inputRecovery" id="txtNewPass" name="txtNewPass" Required>
+        <button type="button" class="btnPass" onclick="togglePassword('txtNewPass', 'Pass2')"><span id="Pass2" class="material-symbols-outlined spanPass">
+                visibility
+        </span></button>
+    </div>
+        
+       `
+
+
+    document.getElementById('divPass').innerHTML = content2;
+
+
+    content3 = `<h6 class="fs-6">Ingresa tu contraseña actual:</h6>
+    <div style="position: relative;" >
+        <input type="password" autocomplete="off" class="form-control inputRecovery" id="txtPass" name="txtPass" Required>
+        <button type="button" class="btnPass" onclick="togglePassword('txtPass', 'Pass')"><span id="Pass" class="material-symbols-outlined spanPass">
+                visibility
+        </span></button>
+    </div>`;
+
+    document.getElementById('divPass2').innerHTML = content3;
+
+
+
+
 }
 
 document.addEventListener('DOMContentLoaded', function (e) {
+
+
+    fetch(API + 'checkBlockedUsers')
+        .then(request => {
+            //Se verifica si la petición fue correcta
+            if (request.ok) {
+                request.json().then(response => {
+                    //Se verifica si la respuesta no es correcta para redireccionar al primer uso
+                    if (response.status) {
+                        sweetAlert(3, response.message, '../../index.php');
+                    } else {
+                    }
+                })
+            } else {
+                console.log(request.status + ' ' + request.statusText);
+            }
+        }).catch(error => console.log(error));
 
 
     cargarInputs();
@@ -152,6 +218,104 @@ document.addEventListener('DOMContentLoaded', function (e) {
 });
 
 
+//Función para cambiar clave
+document.getElementById('update-pass').addEventListener('submit', function (event) {
+    //Se evita que se recargue la pagina
+    const boton2 = document.getElementById('btnChangePass');
+    boton2.disabled = true;
+
+    event.preventDefault();
+
+    // Realizamos peticion a la API de clientes con el caso changePass y method post para dar acceso al valor de los campos del form
+    fetch(API + 'changePassword', {
+        method: 'post',
+        body: new FormData(document.getElementById('update-pass'))
+    }).then(function (request) {
+        // Se verifica si la petición es correcta, de lo contrario se muestra un mensaje indicando el problema.
+        if (request.ok) {
+            request.json().then(function (response) {
+                // Se comprueba si la respuesta es satisfactoria, de lo contrario se muestra un mensaje con la excepción.
+                const input = document.getElementById('txtNewPass');
+                input.disabled = true;
+                if (response.status) {
+                    // En caso de iniciar sesion correctamente mostrar mensaje y redirigir al menu
+                    closeModal('cambiarContraseña');
+                    sweetAlert(1, response.message, '../../index.php');
+                    boton2.disabled = false;
+                    input.disabled = false;
+                } else {
+                    sweetAlert(3, response.exception, null);
+                    boton2.disabled = false;
+                    input.disabled = false;
+                }
+            });
+        } else {
+            console.log(request.status + ' ' + request.statusText);
+        }
+    }).catch(function (error) {
+        console.log(error);
+    });
+
+
+});
+
+//Función para cambiar clave
+document.getElementById('block-account').addEventListener('submit', function (event) {
+    //Se evita que se recargue la pagina
+    const boton2 = document.getElementById('btnBlockUser');
+    boton2.disabled = true;
+
+    event.preventDefault();
+
+    // Realizamos peticion a la API de clientes con el caso changePass y method post para dar acceso al valor de los campos del form
+    fetch(API + 'blockMyAccount', {
+        method: 'post',
+        body: new FormData(document.getElementById('block-account'))
+    }).then(function (request) {
+        // Se verifica si la petición es correcta, de lo contrario se muestra un mensaje indicando el problema.
+        if (request.ok) {
+            request.json().then(function (response) {
+                // Se comprueba si la respuesta es satisfactoria, de lo contrario se muestra un mensaje con la excepción.
+                const input = document.getElementById('txtPass');
+                if (response.status) {
+                    // En caso de iniciar sesion correctamente mostrar mensaje y redirigir al menu
+                    sweetAlert(1, response.message, '../../index.php');
+                    boton2.disabled = false;
+                    input.disabled = false;
+                } else {
+                    sweetAlert(3, response.exception, null);
+                    boton2.disabled = false;
+                    input.disabled = false;
+                }
+            });
+        } else {
+            console.log(request.status + ' ' + request.statusText);
+        }
+    }).catch(function (error) {
+        console.log(error);
+    });
+
+
+});
+
+
+
+function optionSelected() {
+
+    event.preventDefault();
+    const action = document.getElementById('accion').value;
+
+    if (action == 'restaurar') {
+
+        checkCode(API, 'verifyCode', 'checkCode', 'verificarCodigo', 'cambiarContraseña')
+
+    }
+    if (action == 'bloquear') {
+
+        checkCode(API, 'verifyCode', 'checkCode', 'verificarCodigo', 'bloquearUsuario')
+
+    }
+}
 
 
 
