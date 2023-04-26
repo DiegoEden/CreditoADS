@@ -48,7 +48,7 @@ class Customer_page
                     </span>
     
                     <div class="text logo-text">
-                        <span class="name">'. $_SESSION['username'] .'</span>
+                        <span class="name">' . $_SESSION['username'] . '</span>
                     </div>
                 </div>
     
@@ -112,7 +112,7 @@ class Customer_page
                     </li>
 
                     <li class="">
-                        <a style="cursor:pointer" class="buttonMenu" href="settings.php">
+                        <a style="cursor:pointer" data-bs-toggle="modal" data-bs-target="#modalProfile">
                             <i class="bx bx-cog icon"></i>
                             <span class="text nav-text">Configuración</span>
                         </a>
@@ -138,7 +138,7 @@ class Customer_page
                     <li><a class="dropdown-item" onclick="logOut()">Cerrar sesión</a></li>
                     <li><a class="dropdown-item" id="modoClaro2" onclick="modoClaro()">Modo Claro</a></li>
                     <li><a class="dropdown-item" id="modoOscuro2" onclick="modoOscuro()">Modo Oscuro</a></li>
-                    <li><a class="dropdown-item" href="settings.php">Configuración</a></li>
+                    <li><a class="dropdown-item" data-bs-toggle="modal" data-bs-target="#modalProfile">Configuración</a></li>
                 </ul>
             </div>
                 <a href="dashboard.php" class="mobileButton">
@@ -181,17 +181,145 @@ class Customer_page
         print('
             <div class="row my-4">
                 <div class="col-12">
-                    <h2 class="titulo-dashboard">¡Bienvenido '.$_SESSION['username'].'!</h2>
+                    <h2 class="titulo-dashboard">¡Bienvenido ' . $_SESSION['nombres'] . '!</h2>
                 </div>
             </div>
-        '                
+        '
         );
     }
 
     public static function footerTemplate($controller)
     {
+        print ( '
+        
+        <!-- Modal para verificar el codigo de verificación -->
+        <div class="modal fade" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" id="verificarCodigo" tabindex="-1" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-scrollable modal-xl modal-dialog-centered">
+                <div class="modal-content justify-content-center px-3 py-2">
+                    <!-- Cabecera del Modal -->
+                    <div class="modal-header" style="justify-content: flex-end; flex-direction: row-reverse;">
+    
+                        <h1 style="margin-left: 10px;" class="modal-title fs-5" id="titleModal" name="titleModal"></h1>
+                        <span class="material-symbols-rounded">
+                            info
+                        </span>
+                    </div>
+    
+                    <!-- Contenido del Modal -->
+                    <div class="modal-body textoModal px-3 pb-4 mt-2">
+                        <div class="row">
+                            
+                            <div class="col-xl-12 col-md-12 col-sm-12 col-xs-12 d-flex justify-content-center flex-column">
+                            <input type="text" class="d-none" id="accion" name="accion">
+
+                                <form autocomplete="off" action="/form" id="checkCode">
+                                    <div class="d-flex justify-content-center align-items-center mb-2">
+                                        <div class="alert alert-warning alert-dismissible fade show" role="alert" style="font-size: 14px; color:black !important" 
+                                        id="alertModal" name="alertModal">
+                                           
+    
+                                        </div>
+                                    </div>
+                                    <div class="d-flex justify-content-center align-items-center mb-2">
+                                        <!-- Input Correo -->
+                                        <div class="form-group mb-4" style="width: 300px;">
+                                            <h6 class="fs-6">Código de verificación:</h6>
+                                            <div class="d-flex justify-content-center align-items-center" id="divCodigo">
+                                               
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="d-flex justify-content-center align-items-center">
+                                        <button onclick="optionSelected()" type="submit" id="btnVerify" class="btn btnVerify mr-2">Verificar
+                                            Código</button>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                        <!-- Fin del Contenido del Modal -->
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Fin del Modal -->
+        ');
+
         print('
                         
+        <!-- Modal -->
+            <div class="modal fade" id="modalProfile" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered  modal-lg">
+                <div class="modal-content">
+                    <div class="modal-header">
+                    <span class="material-symbols-rounded">
+                    settings
+                    </span>
+                    <h1 style="margin-left:10px;" class="modal-title fs-5" >Ajustes de la cuenta</h1>
+                    <button type="button" class="btn-close closeModalButton" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+
+
+                    <div class="row justify-content-center">
+                        <div class="col-12 d-flex justify-content-center align-items-center">
+                            <div class="row mb-3">
+                                <div class="col-12">
+                                    <h3 class="text-center" style=" letter-spacing: 4px;" id="nombreCliente">' . $_SESSION['nombres'] . ' ' . $_SESSION['apellidos'] . '</h3>
+                                </div>
+                            </div>
+            
+                        </div>
+                    </div>
+            
+                    <div class="row justify-content-center">
+                        <div class="col-12 d-flex justify-content-center align-items-center">
+            
+                            <div class="row mt-4">
+                                <div class="col-12">
+                                    <h4 class="titulosAjustes">Seguridad e inicio de sesión</h4>
+            
+                                </div>
+                            </div>
+            
+                        </div>
+                    </div>
+                    <br>
+
+            
+                    <div class="row justify-content-center">
+                        <div class="col-12 d-flex justify-content-center align-items-center">
+                            <!-- Div especializado para cada sección -->
+                            <button class=" btn informacionPersonal" id="btnPass">
+                                
+                            <h4 class="titulosAjustes">Cambiar contraseña</h4>
+
+                            </button>
+                            
+                        </div>
+                        <div class="col-12 d-flex justify-content-center align-items-center">
+                        <!-- Div especializado para cada sección -->
+                        <button class=" btn informacionPersonal" id="btnBlock">
+                            
+                        <h4 class="titulosAjustes">Bloquear mi cuenta</h4>
+
+                        </button>
+
+                        <br>
+
+                        
+                    </div>
+                    </div>
+            
+                </div>
+            
+            
+
+                    </div>
+                
+            </div>
+            </div>
+
+            
         
 
                 <script src="../../app/controllers/customer/' . $controller . '"></script>

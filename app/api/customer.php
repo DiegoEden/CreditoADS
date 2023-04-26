@@ -2,6 +2,7 @@
 require_once('../helpers/connection.php');
 require_once('../helpers/validator.php');
 require_once('../models/customer.php');
+require_once('../helpers/mailformat.php');
 
 
 use PHPMailer\PHPMailer\PHPMailer;
@@ -20,6 +21,7 @@ $mail = new PHPMailer(true);
 if (isset($_GET['action'])) {
     session_start();
     $customers = new Customers();
+    $mailFormat = new Mailformat();
     $result = array('status' => 0, 'message' => null, 'exception' => null);
 
     if (isset($_SESSION['id_cliente'])) {
@@ -36,6 +38,112 @@ if (isset($_GET['action'])) {
             case 'checkSession':
                 $result['status'] = 1;
                 $result['message'] = 'Posee una sesión activa.';
+                break;
+
+            case 'sendMailPass':
+                // Generamos el codigo de seguridad 
+                $code = rand(999999, 111111);
+                if ($customers->set_correo_electronico($_SESSION['correo'])) {
+                    if ($customers->validarCorreo()) {
+                        $customers->set_codigo($code);
+                        // Ejecutamos funcion para obtener el usuario del correo ingresado\
+                        $customers->obtenerUsuario($_SESSION['correo']);
+
+                        try {
+
+
+                            $body = $mailFormat->printMailFormatCode('passwordCode', $code, $_SESSION['nombres']);
+
+                            //Ajustes del servidor
+                            $mail->SMTPDebug = 0;
+                            $mail->isSMTP();
+                            $mail->Host       = 'smtp.gmail.com';
+                            $mail->SMTPAuth   = true;
+                            $mail->Username   = 'asistenciacreditoads@gmail.com';
+                            $mail->Password   = 'lraikofhngsxoyaf';
+                            $mail->SMTPSecure = 'tls';
+                            $mail->Port       = 587;
+                            $mail->CharSet = 'UTF-8';
+
+
+                            //Receptores
+                            $mail->setFrom('asistenciacreditoads@gmail.com', 'Servicios al Cliente CreditoADS');
+                            $mail->addAddress($_SESSION['correo']);
+
+                            //Contenido
+                            $mail->isHTML(true);
+                            $mail->Subject = 'Recuperación de contraseña | CreditoADS';
+                            $mail->Body    = $body;
+
+                            if ($mail->send()) {
+                                $result['status'] = 1;
+                                $result['message'] = 'Código enviado correctamente,';
+                                $customers->actualizarCodigo();
+                            }
+                        } catch (Exception $e) {
+                            $result['exception'] = $mail->ErrorInfo;
+                        }
+                    } else {
+
+                        $result['exception'] = 'El correo ingresado no está registrado';
+                    }
+                } else {
+
+                    $result['exception'] = 'Correo incorrecto';
+                }
+
+                break;
+
+            case 'sendBlockMail':
+                // Generamos el codigo de seguridad 
+                $code = rand(999999, 111111);
+                if ($customers->set_correo_electronico($_SESSION['correo'])) {
+                    if ($customers->validarCorreo()) {
+                        $customers->set_codigo($code);
+                        // Ejecutamos funcion para obtener el usuario del correo ingresado\
+                        $customers->obtenerUsuario($_SESSION['correo']);
+                        try {
+
+                            $body = $mailFormat->printMailFormatCode('blockAccount', $code, $_SESSION['nombres']);
+
+                            //Ajustes del servidor
+                            $mail->SMTPDebug = 0;
+                            $mail->isSMTP();
+                            $mail->Host       = 'smtp.gmail.com';
+                            $mail->SMTPAuth   = true;
+                            $mail->Username   = 'asistenciacreditoads@gmail.com';
+                            $mail->Password   = 'lraikofhngsxoyaf';
+                            $mail->SMTPSecure = 'tls';
+                            $mail->Port       = 587;
+                            $mail->CharSet = 'UTF-8';
+
+
+                            //Receptores
+                            $mail->setFrom('asistenciacreditoads@gmail.com', 'Servicios al Cliente CreditoADS');
+                            $mail->addAddress($_SESSION['correo']);
+
+                            //Contenido
+                            $mail->isHTML(true);
+                            $mail->Subject = 'Bloqueo de usuario | CreditoADS';
+                            $mail->Body    = $body;
+
+                            if ($mail->send()) {
+                                $result['status'] = 1;
+                                $result['message'] = 'Código enviado correctamente,';
+                                $customers->actualizarCodigo();
+                            }
+                        } catch (Exception $e) {
+                            $result['exception'] = $mail->ErrorInfo;
+                        }
+                    } else {
+
+                        $result['exception'] = 'El correo ingresado no está registrado';
+                    }
+                } else {
+
+                    $result['exception'] = 'Correo incorrecto';
+                }
+
                 break;
         }
     } else {
@@ -198,6 +306,9 @@ if (isset($_GET['action'])) {
 
                         try {
 
+                            $body = $mailFormat->printMailFormatCode('passwordCode', $code, $_SESSION['nombres_temp']);
+
+
                             //Ajustes del servidor
                             $mail->SMTPDebug = 0;
                             $mail->isSMTP();
@@ -217,8 +328,7 @@ if (isset($_GET['action'])) {
                             //Contenido
                             $mail->isHTML(true);
                             $mail->Subject = 'Recuperación de contraseña | CreditoADS';
-                            $mail->Body    = 'Hola ' . $_SESSION['nombres_temp'] . ', hemos enviado este correo para que restaures tu contraseña, tu código de seguridad es: <b>' . $code . '</b>, 
-                            si tú no haz solicitado esta acción, ignora este mensaje';
+                            $mail->Body    = $body;
 
                             if ($mail->send()) {
                                 $result['status'] = 1;
@@ -267,6 +377,8 @@ if (isset($_GET['action'])) {
 
                             try {
 
+                                $body = $mailFormat->printMailFormatNotification('notificationPasswordChange', $_SESSION['nombres_temp']);
+
                                 //Ajustes del servidor
                                 $mail->SMTPDebug = 0;
                                 $mail->isSMTP();
@@ -286,7 +398,7 @@ if (isset($_GET['action'])) {
                                 //Contenido
                                 $mail->isHTML(true);
                                 $mail->Subject = 'Alerta de seguridad | CreditoADS';
-                                $mail->Body    = 'Hola ' . $_SESSION['nombres_temp'] . ', Se cambió la contraseña de tu cuenta. Si no fuiste tú, comunicarse con el equipo de seguridad CreditoADS';
+                                $mail->Body    = $body;
 
                                 $mail->send();
                             } catch (Exception $e) {
@@ -298,7 +410,7 @@ if (isset($_GET['action'])) {
                             $customers->cleanCode($_SESSION['id_cliente_temp']);
                             unset($_SESSION['id_cliente_temp']);
                             unset($_SESSION['mail']);
-                            unset($_SESSION['nombre_temp']);
+                            unset($_SESSION['nombres_temp']);
                         } else {
                             $result['exception'] = Database::getException();
                         }

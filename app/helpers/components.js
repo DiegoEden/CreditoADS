@@ -208,7 +208,7 @@ function searchRows(api, form) {
 *
 *   Retorno: ninguno.
 */
-function saveRow(api, action, form, modal) {
+function saveRow(api, action, form, route) {
     fetch(api + action, {
         method: 'post',
         body: new FormData(document.getElementById(form))
@@ -219,9 +219,7 @@ function saveRow(api, action, form, modal) {
                 // Se comprueba si la respuesta es satisfactoria, de lo contrario se muestra un mensaje con la excepción.
                 if (response.status) {
                     // Se cargan nuevamente las filas en la tabla de la vista después de agregar o modificar un registro.
-                    readRows(api);
-                    sweetAlert(1, response.message, closeModal(modal));
-                    clearForm(form);
+                    sweetAlert(1, response.message, route);
                 } else {
                     sweetAlert(2, response.exception, null);
                 }
@@ -680,15 +678,15 @@ function closeModal(form) {
 
 //funcion para inputs de codigos
 function autotab(current, to, prev) {
-	if (current.getAttribute &&
-		current.value.length == current.getAttribute("maxlength")) {
-		to.focus()
+    if (current.getAttribute &&
+        current.value.length == current.getAttribute("maxlength")) {
+        to.focus()
 
-	} else {
-		prev.focus()
+    } else {
+        prev.focus()
 
 
-	}
+    }
 
 
 }

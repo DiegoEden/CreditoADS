@@ -439,4 +439,14 @@ class Customers extends Validator
         $params = array($hash, $this->id_cliente);
         return Database::executeRow($sql, $params);
     }
+
+    //Función para bloquear la cuenta
+    public function blockAccount()
+    {
+        // Declaramos la sentencia que enviaremos a la base con el parametro del nombre de la tabla (dinamico)
+        $sql = "UPDATE Clientes set id_estado_cliente = 3 where id_cliente = ?";
+        // Enviamos los parametros
+        $params = array($this->id_cliente);
+        return Database::executeRow($sql, $params);
+    }
 }

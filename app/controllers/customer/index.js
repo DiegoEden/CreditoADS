@@ -175,7 +175,7 @@ document.getElementById('update-form').addEventListener('submit', function (even
 				if (response.status) {
 					// En caso de iniciar sesion correctamente mostrar mensaje y redirigir al menu
 					closeModal('cambiarContraseña');
-					sweetAlert(1, response.message, null);
+					sweetAlert(1, response.message, 'index.php');
 					boton2.disabled = false;
 					input.disabled = false;
 				} else {
@@ -190,9 +190,6 @@ document.getElementById('update-form').addEventListener('submit', function (even
 	}).catch(function (error) {
 		console.log(error);
 	});
-
-
-
 
 
 });
