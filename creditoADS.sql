@@ -127,4 +127,22 @@ id_pago INT IDENTITY (1, 1) not null primary key,
 
 --cambios 23 de abril --
 
-alter table Clientes add codigo varchar(200)
+alter table Clientes add codigo varchar(200);
+
+
+--cambios 26 de abril --
+
+
+create table Estado_usuario(
+id_estado_usuario INT IDENTITY(1,1) not null primary key, 
+	estado_usuario varchar(50)
+);
+
+
+Insert into Estado_usuario values('Activo'), ('Inactivo'), 
+('Bloqueado');
+
+
+alter table Usuarios add id_estado_usuario int not null references Estado_usuario(id_estado_usuario);
+
+alter table Usuarios add codigo varchar(200)
