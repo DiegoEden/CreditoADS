@@ -79,7 +79,7 @@ if (isset($_GET['action'])) {
                             if ($customers->changePassword()) {
                                 try {
 
-                                    $body = $mailFormat->printMailFormatNotification('notificationPasswordChange', $_SESSION['nombres']);
+                                    $body = $mailFormat->printMailFormatNotification('notificationPasswordChange', $_SESSION['nombres'], 'cliente');
 
                                     //Ajustes del servidor
                                     $mail->SMTPDebug = 0;
@@ -137,7 +137,7 @@ if (isset($_GET['action'])) {
                         if ($customers->blockAccount()) {
                             try {
 
-                                $body = $mailFormat->printMailFormatNotification('notificationBlockedAccount', $_SESSION['nombres']);
+                                $body = $mailFormat->printMailFormatNotification('notificationBlockedAccount', $_SESSION['nombres'], 'cliente');
 
                                 //Ajustes del servidor
                                 $mail->SMTPDebug = 0;
@@ -195,7 +195,7 @@ if (isset($_GET['action'])) {
                         try {
 
 
-                            $body = $mailFormat->printMailFormatCode('passwordCode', $code, $_SESSION['nombres']);
+                            $body = $mailFormat->printMailFormatCode('passwordCode', $code, $_SESSION['nombres'], 'cliente');
 
                             //Ajustes del servidor
                             $mail->SMTPDebug = 0;
@@ -247,7 +247,7 @@ if (isset($_GET['action'])) {
                         $customers->obtenerUsuario($_SESSION['correo']);
                         try {
 
-                            $body = $mailFormat->printMailFormatCode('blockAccount', $code, $_SESSION['nombres']);
+                            $body = $mailFormat->printMailFormatCode('blockAccount', $code, $_SESSION['nombres'], 'cliente');
 
                             //Ajustes del servidor
                             $mail->SMTPDebug = 0;
@@ -449,7 +449,7 @@ if (isset($_GET['action'])) {
 
                         try {
 
-                            $body = $mailFormat->printMailFormatCode('passwordCode', $code, $_SESSION['nombres_temp']);
+                            $body = $mailFormat->printMailFormatCode('passwordCode', $code, $_SESSION['nombres_temp'], 'cliente');
 
 
                             //Ajustes del servidor
@@ -520,7 +520,7 @@ if (isset($_GET['action'])) {
 
                             try {
 
-                                $body = $mailFormat->printMailFormatNotification('notificationPasswordChange', $_SESSION['nombres_temp']);
+                                $body = $mailFormat->printMailFormatNotification('notificationPasswordChange', $_SESSION['nombres_temp'], 'cliente');
 
                                 //Ajustes del servidor
                                 $mail->SMTPDebug = 0;

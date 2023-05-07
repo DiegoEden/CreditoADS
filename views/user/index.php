@@ -34,7 +34,7 @@
                             <div class="col-md-6 col-lg-7 d-flex align-items-center">
                                 <div class="card-body p-4 p-lg-5 text-black">
 
-                                    <form id="login-form">
+                                    <form method="post" id="login-form">
 
                                         <div class="d-flex align-items-center mb-3 pb-1">
                                             <img src="../../resources/img/system/logo.png" alt="login form" class="img-fluid" height="50" width="50" />
@@ -44,11 +44,11 @@
                                         <h5 class="fw-normal mb-3 pb-3" style="letter-spacing: 1px;">Iniciar sesión</h5>
 
                                         <div class="form-outline mb-4">
-                                            <input type="text" id="form2Example17" class="form-control " placeholder="Nombre de usuario" />
+                                            <input type="text" id="txtCorreo" name="txtCorreo" class="form-control " placeholder="Nombre de usuario" />
                                         </div>
 
                                         <div class="form-outline mb-4">
-                                            <input type="password" id="form2Example27" class="form-control " placeholder="Contraseña"/>
+                                            <input type="password" id="txtPassword" name="txtPassword" class="form-control " placeholder="Contraseña"/>
                                         </div>
 
                                         <div class="pt-1 mb-4">

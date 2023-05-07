@@ -23,6 +23,127 @@
 
 <body>
 
+    <section class="seccion animate__animated animate__fadeIn animate__slow">
+
+        <div class="container">
+            <div class="row d-flex justify-content-center align-items-center h-100">
+                <div class="col-md-12">
+                    <h5 id="titulos">¡Hola!, por favor, ingresa los datos solicitados</h5>
+                </div>
+            </div>
+            <br>
+        </div>
+
+        <br>
+
+        <div class="espacioForm">
+            <div class="container contenedorForm" id="contenedorDatos">
+                <div class="form-outer ">
+                    <form method="post" id="register-form" autocomplete="off" class="formDatos">
+                        <div class="page">
+                            <div class="row">
+                                <div class="col-xl-6 col-md-6 col-sm-12 col-xs-12">
+                                    <div class="form-group">
+                                        <label for="txtNombre">Nombre</label>
+                                        <input type="text" name="txtNombre" id="txtNombre" class="form-control input-forms" required maxlength="50">
+                                    </div>
+                                    <br>
+                                    <div class="form-group">
+                                        <label for="txtApellido">Apellido</label>
+                                        <input type="text" name="txtApellido" id="txtApellido" class="form-control input-forms" required maxlength="50">
+                                    </div>
+
+                                    <br>
+                                    <div class="form-group">
+                                        <label for="txtNacimiento">Fecha de nacimiento</label>
+                                        <input type="date" name="txtNacimiento" id="txtNacimiento" class="form-control input-forms" required>
+                                    </div>
+                                    <br>
+                                   
+                                    <div class="form-group">
+                                        <label for="txtDui">DUI</label>
+                                        <input type="text" name="txtDui" id="txtDui" class="form-control input-forms" required>
+                                    </div>
+                    
+                                    <br>
+                                    <div class="form-group">
+                                        <label for="txtEmail">Correo electrónico</label>
+                                        <input type="email" name="txtEmail" id="txtEmail" class="form-control input-forms" required maxlength="50">
+
+                                    </div>
+                                </div>
+                                <div class="col-xl-6 col-md-6 col-sm-12 col-xs-12">
+                                    
+                                                                        <div class="form-group">
+                                        <label for="txtDireccion">Dirección</label>
+                                        <textarea type="text" name="txtDireccion" id="txtDireccion" class="form-control input-forms" required rows="1"></textarea>
+                                    </div>
+                                    <br>
+                                    <div class="form-group">
+                                        <label for="username">Nombre de usuario</label>
+                                        <input type="text" name="username" id="username" class="form-control input-forms" required maxlength="50">
+
+                                    </div>
+
+                                    <br>
+
+                                    <div class="alert alert-warning alert-dismissible fade show" role="alert" style="color:black !important;">
+                                        <strong class="alertaText">Advertencia</strong>
+                                        <p class="alertaText">Tu contraseña debe contener al menos una letra mayúscula, una letra minúscula,
+                                            un número y un carácter especial, y que tenga entre 8 y 16 caracteres.
+                                            También asegúrate que la contraseña no contenga espacios en blanco</p>
+                                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                                    </div>
+                                    <div style="position: relative;">
+                                        <label for="password">Contraseña</label>
+                                        <div style="position: relative;">
+                                            <input id="password" name="password" type="password" class="form-control input-forms" required maxlength="16">
+                                            <button type="button" style="padding-top: 10px !important;" class="btnPass " onclick="togglePassword('password', 'Pass1')"><span id="Pass1" class="material-symbols-outlined eye">
+                                                    visibility
+                                                </span></button>
+                                        </div>
+                                    </div>
+
+                                    <br>
+
+                                    <div style="position: relative;">
+                                        <label for="password">Comprobar contraseña</label>
+                                        <div style="position: relative;">
+                                            <input id="passwordVerify" name="passwordVerify" type="password" class="form-control input-forms" required maxlength="16">
+                                            <button type="button" style="padding-top: 10px !important;" class="btnPass " onclick="togglePassword('passwordVerify', 'Pass2')"><span id="Pass2" class="material-symbols-outlined eye">
+                                                    visibility
+                                                </span></button>
+                                        </div>
+                                    </div>
+
+
+                                    <br>
+
+
+
+
+
+                                </div>
+
+                            </div>
+
+                            <br>
+                            <div class="d-flex justify-content-center align-items-center">
+                                <button type="submit" class="btn submit">Crear cuenta</button>
+                            </div>
+
+                        </div>
+
+                    </form>
+                </div>
+            </div>
+        </div>
+
+
+
+
+    </section>
+
 
 
 

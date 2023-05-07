@@ -145,4 +145,11 @@ Insert into Estado_usuario values('Activo'), ('Inactivo'),
 
 alter table Usuarios add id_estado_usuario int not null references Estado_usuario(id_estado_usuario);
 
-alter table Usuarios add codigo varchar(200)
+alter table Usuarios add codigo varchar(200);
+
+
+--cambios 5 mayo
+
+alter table Usuarios add correo_electronico varchar(150);
+
+alter table Usuarios add fecha_nacimiento date;

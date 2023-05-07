@@ -3,7 +3,7 @@
 class Mailformat
 {
 
-  public function printMailFormatNotification($mailType, $name)
+  public function printMailFormatNotification($mailType, $name, $role)
   {
 
     switch ($mailType) {
@@ -33,7 +33,7 @@ class Mailformat
                                             margin-bottom: 30px;
                                           '
                                         >
-                                          Estimado Cliente:
+                                          Estimado $role:
                                         </h1>
                                       </div>";
 
@@ -220,7 +220,7 @@ class Mailformat
     }
   }
 
-  public function printMailFormatCode($mailType, $code, $name)
+  public function printMailFormatCode($mailType, $code, $name, $role)
   {
 
     switch ($mailType) {
@@ -251,7 +251,7 @@ class Mailformat
                             margin-bottom: 30px;
                           '
                         >
-                          Estimado Cliente:
+                          Estimado $role:
                         </h1>
                       </div>";
 

@@ -523,13 +523,6 @@ body.dark .home .text {
 }
 
 
-.btn-close {
-
-    background-image: var(--imgClose);
-
-}
-
-
 /*estilo de los sweetalerts */
 
 .swal-modal {

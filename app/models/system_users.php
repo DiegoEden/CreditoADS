@@ -13,6 +13,9 @@ class SystemUsers extends Validator
     private $id_tipo_usuario = null;
     private $id_estado_usuario = null;
     private $codigo = null;
+    private $correo_electronico = null;
+    private $fecha_nacimiento = null;
+
 
     public function set_id_usuario($value)
     {
@@ -124,6 +127,26 @@ class SystemUsers extends Validator
         }
     }
 
+    public function set_correo_electronico($value)
+    {
+        if ($this->validateEmail($value)) {
+            $this->correo_electronico = $value;
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    public function set_fecha_nacimiento($value)
+    {
+        if ($this->validateDate($value)) {
+            $this->fecha_nacimiento = $value;
+            return true;
+        } else {
+            return false;
+        }
+    }
+
 
     public function get_id_usuario()
     {
@@ -182,18 +205,78 @@ class SystemUsers extends Validator
         return Database::getRows($sql, $params);
     }
 
+    public function get_correo_electronico()
+    {
+        return $this->correo_electronico;
+    }
+
+    public function get_fecha_nacimiento()
+    {
+        return $this->fecha_nacimiento;
+    }
+
+
     public function adminRegister()
     {
         $hash = password_hash($this->pass, PASSWORD_DEFAULT);
 
-        $sql = 'INSERT INTO Usuarios (usuario,nombres,apellidos,pass,dui,direccion,id_tipo_usuario,id_estado_usuario,codigo) VALUES
-        (?,?,?,?,?,?,2,1,NULL)';
+        $sql = 'INSERT INTO Usuarios (usuario,nombres,apellidos,pass,dui,direccion,id_tipo_usuario,id_estado_usuario,codigo,correo_electronico, fecha_nacimiento ) VALUES
+        (?,?,?,?,?,?,2,1,NULL,?,?)';
 
         $params = array(
-            $this->usuario, $this->nombres, $this->apellidos, $hash,  $this->dui, $this->direccion, $this->id_tipo_usuario,
-            $this->id_estado_usuario
+            $this->usuario, $this->nombres, $this->apellidos, $hash,  $this->dui, $this->direccion,
+             $this->correo_electronico, $this->fecha_nacimiento
         );
 
         return Database::executeRow($sql, $params);
+    }
+
+
+
+    public function checkUser($user)
+    {
+
+        $sql = 'SELECT id_usuario, direccion, nombres, apellidos, correo_electronico, fecha_nacimiento, usuario, pass, dui, id_estado_usuario, id_tipo_usuario
+        FROM Usuarios where usuario = ?';
+        $params = array($user);
+        if ($data = Database::getRow($sql, $params)) {
+
+            $this->id_usuario = $data['id_usuario'];
+            $this->nombres = $data['nombres'];
+            $this->apellidos = $data['apellidos'];
+            $this->direccion = $data['direccion'];
+            $this->correo_electronico = $data['correo_electronico'];
+            $this->fecha_nacimiento = $data['fecha_nacimiento'];
+            $this->usuario = $data['usuario'];
+            $this->dui = $data['dui'];
+            $this->id_estado_usuario = $data['id_estado_usuario'];
+            $this->id_tipo_usuario = $data['id_tipo_usuario'];
+
+            return true;
+        } else {
+
+            return false;
+        }
+    }
+
+    public function checkEstado()
+    {
+        if ($this->id_estado_usuario == 1) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    public function checkPassword($password)
+    {
+        $sql = 'SELECT pass from Usuarios where id_usuario = ?';
+        $params = array($this->id_usuario);
+        $data = Database::getRow($sql, $params);
+        if (password_verify($password, $data['pass'])) {
+            return true;
+        } else {
+            return false;
+        }
     }
 }
