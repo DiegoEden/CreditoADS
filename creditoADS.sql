@@ -153,3 +153,13 @@ alter table Usuarios add codigo varchar(200);
 alter table Usuarios add correo_electronico varchar(150);
 
 alter table Usuarios add fecha_nacimiento date;
+
+--cambios 7 de mayo
+
+Insert into Estado_prestamo Values('Pagado'),('Pendiente de pago');
+
+Insert into Tipo_pago Values('Efectivo'),('Transaccion');
+
+
+Insert into Tipo_transaccion Values('Depósitos'),('Retiros')
+
