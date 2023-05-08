@@ -64,7 +64,7 @@ Customer_page::SideBarTemplate('CreditoADS | Mis cuentas')
                 <span class="material-symbols-rounded">
                     info
                 </span>
-                <h1 style="margin-left:10px;" class="modal-title fs-5">Historial de Transacciones</h1>
+                <h1 style="margin-left:10px;" class="modal-title fs-5">Historial de transferencias</h1>
                 <button type="button" class="btn-close closeModalButton" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
@@ -83,6 +83,8 @@ Customer_page::SideBarTemplate('CreditoADS | Mis cuentas')
                                     <th scope="col">Monto</th>
                                     <th scope="col">Descripción</th>
                                     <th scope="col">Tipo de transacción</th>
+                                    <th scope="col"></th>
+
                                 </tr>
                             </thead>
                             <tbody id="tbody-rows2">

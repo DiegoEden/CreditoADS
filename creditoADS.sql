@@ -163,3 +163,4 @@ Insert into Tipo_pago Values('Efectivo'),('Transaccion');
 
 Insert into Tipo_transaccion Values('Depósitos'),('Retiros')
 
+Insert into Estado_prestamo Values('En revision'), ('Denegado'),('Aceptado');

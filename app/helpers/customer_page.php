@@ -74,14 +74,14 @@ class Customer_page
                         </li>
     
                         <li class="nav-link">
-                            <a href="#" class="buttonMenu">
+                            <a href="transfer.php" class="buttonMenu">
                                 <i class="bx bx-transfer icon"></i>
                                 <span class="text nav-text">Transferencias</span>
                             </a>
                         </li>
     
                         <li class="nav-link">
-                            <a href="#" class="buttonMenu">
+                            <a href="credit.php" class="buttonMenu">
                                 <i class="bx bx-wallet-alt icon" ></i>
                                 <span class="text nav-text">Créditos</span>
                             </a>
@@ -147,10 +147,10 @@ class Customer_page
                 <a href="accounts.php" class="mobileButton">
                 <i class="bx bx-briefcase icon"></i>
                 </a>           
-                <a href="#" class="mobileButton">
+                <a href="transfer.php" class="mobileButton">
                 <i class="bx bx-transfer icon"></i>
                 </a>                
-                <a href="#" class="mobileButton">
+                <a href="credit.php" class="mobileButton">
                 <i class="bx bx-wallet-alt icon" ></i>
                 </a>     
                 

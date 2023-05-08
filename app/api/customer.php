@@ -3,6 +3,7 @@ require_once('../helpers/connection.php');
 require_once('../helpers/validator.php');
 require_once('../models/customer.php');
 require_once('../models/account.php');
+require_once('../models/transfer.php');
 require_once('../helpers/mailformat.php');
 
 
@@ -23,6 +24,7 @@ if (isset($_GET['action'])) {
     session_start();
     $customers = new Customers();
     $mailFormat = new Mailformat();
+    $transfer =  new Transfer();
     $account =  new Account();
     $result = array('status' => 0, 'message' => null, 'exception' => null);
 
@@ -87,6 +89,79 @@ if (isset($_GET['action'])) {
                     } else {
                         $result['exception'] = 'No se han encontrado registros de cuentas.';
                     }
+                }
+
+                break;
+
+            case 'readTransfer':
+                $transfer->set_id_cliente($_SESSION['id_cliente']);
+                if ($result['dataset'] = $transfer->getTrans()) {
+                    $result['status'] = 1;
+                } else {
+                    if (Database::getException()) {
+                        $result['error'] = 1;
+                        $result['exception'] = Database::getException();
+                    } else {
+                        $result['exception'] = 'No se han encontrado registros de cuentas.';
+                    }
+                }
+
+                break;
+
+
+            case 'readCustomAcc':
+                if ($result['dataset'] = $transfer->getCustomerAccounts()) {
+                    $result['status'] = 1;
+                } else {
+                    if (Database::getException()) {
+                        $result['exception'] = Database::getException();
+                    } else {
+                    }
+                }
+                break;
+
+            case 'getTransacType':
+                if ($result['dataset'] = $transfer->getTransacType()) {
+                    $result['status'] = 1;
+                } else {
+                    if (Database::getException()) {
+                        $result['exception'] = Database::getException();
+                    } else {
+                    }
+                }
+                break;
+
+            case 'addTransfer':
+                $_POST = $transfer->validateForm($_POST);
+                if ($transfer->set_cantidad_dinero($_POST['cantidad_dinero'])) {
+                    if ($transfer->set_descripcion($_POST['txtDesc'])) {
+                        if (isset($_POST['Cuenta'])) {
+                            if (isset($_POST['tipoTransf'])) {
+                                if ($transfer->set_id_cuenta($_POST['Cuenta'])) {
+                                    if ($transfer->set_id_tipo_transaccion($_POST['tipoTransf'])) {
+                                        if ($transfer->addTransfer()) {
+                                            $result['status'] = 1;
+                                            $result['message'] = 'Transferencia creada correctamente.';
+                                        } else {
+                                            $result['exception'] = Database::getException();
+                                        }
+                                    } else {
+                                        $result['exception'] = 'Dato incorrecto';
+                                    }
+                                } else {
+                                    $result['exception'] = 'Cuenta incorrecta';
+                                }
+                            } else {
+                                $result['exception'] = 'Ingrese el tipo de transferencia';
+                            }
+                        } else {
+                            $result['exception'] = 'Ingrese su cuenta';
+                        }
+                    } else {
+                        $result['exception'] = 'Descripción incorrecta';
+                    }
+                } else {
+                    $result['exception'] = 'Monto incorrecto';
                 }
 
                 break;
