@@ -2,6 +2,7 @@
 require_once('../helpers/connection.php');
 require_once('../helpers/validator.php');
 require_once('../models/system_users.php');
+require_once('../models/newusers.php');
 require_once('../helpers/mailformat.php');
 
 
@@ -20,12 +21,63 @@ if (isset($_GET['action'])) {
 
     session_start();
     $users = new SystemUsers();
+    $NewUsers=new NewUsers();
     $mailFormat = new Mailformat();
     $result = array('status' => 0, 'message' => null, 'exception' => null);
 
     if (isset($_SESSION['id_usuario'])) {
         switch ($_GET['action']) {
+            case 'readAll':
+                if ($result['dataset'] = $NewUsers->readAll()) {
+                    $result['status'] = 1;
+                } else {
+                    if (Database::getException()) {
+                        $result['exception'] = Database::getException();
+                    } else {
+                        $result['exception'] = 'No existen usuarios registrados.';
+                    }
+                }
+                break;
+                case 'create':
+                    $_POST = $NewUsers->validateForm($_POST);
+                    if ($NewUsers->setusuarios($_POST['Usuario'])) {
+                        if ($NewUsers->setnombre($_POST['Nombre'])) {
+                            if ($NewUsers->setapellidos($_POST['Apellido'])) {
+                                if ($NewUsers->setdui($_POST['txtDui'])) {
+                                    if ($NewUsers->setdireccion($_POST['direccion'])) {
+                                        if ($NewUsers->setCorreo($_POST['txtCorreo'])) {
+                                            if ($NewUsers->createRow()) {
+                                                $result['status'] = 1;
+                                               $result['message'] = 'Usuario Guardado Correctamente'; 
+                                           } else {
+                                               $result['exception'] = Database::getException();;
+                                           }
+                        
+                                        } else {
+                                                $result['exception'] = 'correo incorrecto';
+                                            } 
+                        
+                                    } else {
+                                            $result['exception'] = 'direccion incorrecto';
+                                        } 
+                        
+                                } else {
+                                        $result['exception'] = 'dui incorrecto';
+                                    } 
+                        
+                            } else {
+                                    $result['exception'] = 'apellido incorrecto';
+                                } 
+                            
+                        } else {
+                                $result['exception'] = 'nombre incorrecto';
+                            } 
 
+                    } else {
+                            $result['exception'] = 'usuario incorrecto';
+                        } 
+
+                    break;
             case 'logOut':
                 unset($_SESSION['id_usuario']);
                 $result['status'] = 1;
@@ -51,6 +103,8 @@ if (isset($_GET['action'])) {
                 }
 
                 break;
+               
+
         }
     } else {
 
@@ -67,7 +121,7 @@ if (isset($_GET['action'])) {
                     }
                 }
                 break;
-
+              
             case 'adminRegister':
                 $_POST = $users->validateForm($_POST);
                 if ($users->set_nombres($_POST['txtNombre'])) {
