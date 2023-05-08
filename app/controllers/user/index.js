@@ -27,6 +27,26 @@ document.addEventListener('DOMContentLoaded', function () {
 
 
 
+document.addEventListener('DOMContentLoaded', function (e) {
+
+    fetch(API_USUARIO + 'checkSession')
+        .then(request => {
+            //Se verifica si la petición fue correcta
+            if (request.ok) {
+                request.json().then(response => {
+                    if (response.status) {
+                        window.location.href = 'dashboard.php';
+                    } else {
+                    }
+                })
+            } else {
+                console.log(request.status + ' ' + request.statusText);
+            }
+        }).catch(error => console.log(error));
+
+});
+
+
 // Método manejador de eventos que se ejecuta cuando se envía el formulario de iniciar sesión.
 document.getElementById('login-form').addEventListener('submit', function (event) {
 	// Se evita recargar la página web después de enviar el formulario.

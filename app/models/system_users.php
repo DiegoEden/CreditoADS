@@ -279,4 +279,13 @@ class SystemUsers extends Validator
             return false;
         }
     }
+
+
+    public function checkBlockedUsers()
+    {
+        $sql = "SELECT * from Usuarios where id_usuario = ? AND id_estado_usuario=3";
+        // Enviamos los parametros
+        $params = array($this->id_usuario);
+        return Database::getRow($sql, $params);
+    }
 }

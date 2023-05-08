@@ -25,6 +25,32 @@ if (isset($_GET['action'])) {
 
     if (isset($_SESSION['id_usuario'])) {
         switch ($_GET['action']) {
+
+            case 'logOut':
+                unset($_SESSION['id_usuario']);
+                $result['status'] = 1;
+                // Mostramos mensaje de confirmacion
+                $result['message'] = 'Sesión eliminada correctamente';
+                break;
+
+            case 'checkSession':
+                $result['status'] = 1;
+                $result['message'] = 'Posee una sesión activa.';
+                break;
+
+
+            case 'checkBlockedUsers':
+
+                if ($users->set_id_usuario($_SESSION['id_usuario'])) {
+                    if ($users->checkBlockedUsers()) {
+                        $result['status'] = 1;
+                        $result['message'] = 'El usuario se encuentra bloqueado.';
+
+                        unset($_SESSION['id_usuario']);
+                    }
+                }
+
+                break;
         }
     } else {
 
@@ -98,29 +124,29 @@ if (isset($_GET['action'])) {
                 }
                 break;
 
-                case 'logIn':
-                    $_POST = $users->validateForm($_POST);
-                    if ($users->checkUser($_POST['txtCorreo'])) {
-                        if ($users->checkEstado()) {
-                            if ($users->checkPassword($_POST['txtPassword'])) {
-                                $_SESSION['id_usuario'] = $users->get_id_usuario();
-                                $_SESSION['tipo_usuario'] = $users->get_id_tipo_usuario();
-                                $_SESSION['nombres'] = $users->get_nombres();
-                                $_SESSION['apellidos'] = $users->get_apellidos();
-                                $_SESSION['username'] =  $users->get_usuario();
-                                $_SESSION['correo'] = $users->get_correo_electronico();
-                                $result['status'] = 1;
-                                $result['message'] = 'Acceso concedido, bienvenido ' . $users->get_usuario();
-                            } else {
-                                $result['exception'] = 'La contraseña ingresada es incorrecta';
-                            }
+            case 'logIn':
+                $_POST = $users->validateForm($_POST);
+                if ($users->checkUser($_POST['txtCorreo'])) {
+                    if ($users->checkEstado()) {
+                        if ($users->checkPassword($_POST['txtPassword'])) {
+                            $_SESSION['id_usuario'] = $users->get_id_usuario();
+                            $_SESSION['tipo_usuario'] = $users->get_id_tipo_usuario();
+                            $_SESSION['nombres'] = $users->get_nombres();
+                            $_SESSION['apellidos'] = $users->get_apellidos();
+                            $_SESSION['username'] =  $users->get_usuario();
+                            $_SESSION['correo'] = $users->get_correo_electronico();
+                            $result['status'] = 1;
+                            $result['message'] = 'Acceso concedido, bienvenido ' . $users->get_usuario();
                         } else {
-                            $result['exception'] = 'El usuario está inactivo o bloqueado';
+                            $result['exception'] = 'La contraseña ingresada es incorrecta';
                         }
                     } else {
-                        $result['exception'] = 'El correo ingresado es incorrecto.';
+                        $result['exception'] = 'El usuario está inactivo o bloqueado';
                     }
-                    break;
+                } else {
+                    $result['exception'] = 'El correo ingresado es incorrecto.';
+                }
+                break;
         }
     }
 

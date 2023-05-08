@@ -2,6 +2,7 @@
 require_once('../helpers/connection.php');
 require_once('../helpers/validator.php');
 require_once('../models/customer.php');
+require_once('../models/account.php');
 require_once('../helpers/mailformat.php');
 
 
@@ -22,6 +23,7 @@ if (isset($_GET['action'])) {
     session_start();
     $customers = new Customers();
     $mailFormat = new Mailformat();
+    $account =  new Account();
     $result = array('status' => 0, 'message' => null, 'exception' => null);
 
     if (isset($_SESSION['id_cliente'])) {
@@ -48,6 +50,42 @@ if (isset($_GET['action'])) {
                         $result['message'] = 'El usuario se encuentra bloqueado.';
 
                         unset($_SESSION['id_cliente']);
+                    }
+                }
+
+                break;
+
+            case 'getAccTransac':
+
+                if (isset($_POST['txtIdx'])) {
+                    $valor = $_POST['txtIdx'];
+                    // Ejecutamos la funcion del modelo
+                    if ($result['dataset'] = $account->getAccTrans($valor)) {
+                        $result['status'] = 1;
+                    } else {
+                        if (Database::getException()) {
+                            $result['exception'] = Database::getException();
+                        } else {
+                            $result['exception'] = 'No existen registros';
+                        }
+                    }
+                } else {
+                    // El campo no ha sido enviado
+                }
+
+
+                break;
+            case 'readAll':
+
+                $account->set_id_cliente($_SESSION['id_cliente']);
+                if ($result['dataset'] = $account->getAccounts()) {
+                    $result['status'] = 1;
+                } else {
+                    if (Database::getException()) {
+                        $result['error'] = 1;
+                        $result['exception'] = Database::getException();
+                    } else {
+                        $result['exception'] = 'No se han encontrado registros de cuentas.';
                     }
                 }
 

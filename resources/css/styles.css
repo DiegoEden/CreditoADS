@@ -1,7 +1,7 @@
 body {
     font-family: 'Montserrat';
     background-color: var(--body-color);
-    transition: var(--animation);
+    transition: var(--tran-05);
 }
 
 .seccion {
@@ -43,7 +43,7 @@ label {
     background-color: var(--body-color);
     border-radius: 10px;
     border: 1px solid var(--colorLetra);
-    transition: var(--animation);
+    transition: var(--tran-05);
 }
 
 .input-forms:hover {
@@ -67,7 +67,7 @@ label {
     padding-bottom: 20px;
     padding-left: 20px;
     padding-right: 20px;
-    transition: var(--animation);
+    transition: var(--tran-05);
 
 }
 
@@ -87,7 +87,7 @@ label {
 }
 
 label {
-    transition: var(--animation);
+    transition: var(--tran-05);
 }
 
 
@@ -99,7 +99,7 @@ h4,
 h5,
 h6 {
 
-    transition: var(--animation);
+    transition: var(--tran-05);
     color: var(--colorLetra);
 
 }
@@ -627,7 +627,7 @@ body.dark .home .text {
     padding-bottom: 10px;
     border-radius: 5px;
     text-decoration: none;
-    transition: var(--animation);
+    transition: var(--tran-05);
 
 }
 
@@ -818,18 +818,68 @@ body.dark .home .text {
     margin-right: 5px;
 }
 
-.spanPass{
+.spanPass {
 
     font-size: 25px;
 }
 
-.espacioForm{
+.espacioForm {
 
     padding: 7px;
 }
 
 
-.eye{
+.eye {
 
     font-size: 24px !important;
+}
+
+
+.adsTable th,
+.adsTable td,
+.adsTable thead {
+    padding: 0 !important;
+    margin: 0 !important;
+    color: var(--colorLetra) !important;
+    text-align: center !important;
+
+}
+
+
+.adsTable th {
+    padding: 0px !important;
+    font-size: 16px;
+    font-weight: 700;
+    color: var(--colorLetra) !important;
+}
+
+.adsTable td {
+    padding: 20px !important;
+    font-size: 13px;
+    font-weight: 500;
+    color: var(--colorLetra);
+}
+
+.tablaResponsive {
+    padding-left: 10px !important;
+    padding-right: 10px !important;
+}
+
+.iconosBotones {
+
+    font-size: 25px;
+}
+
+.btnTabla {
+    background-color: transparent !important;
+    color: var(--colorLetra) !important;
+    border: none;
+    padding-bottom: 10px;
+    transition: var(--tran-05);
+}
+
+.btnTabla:hover {
+    background-color: #3E5C7F !important;
+    transition: var(--tran-05);
+
 }

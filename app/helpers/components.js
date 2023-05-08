@@ -722,3 +722,25 @@ function autotab(current, to, prev) {
 
 
 }
+
+
+function readRows2(api, form, method) {
+    fetch(api + method, {
+        method: 'post',
+        body: new FormData(document.getElementById(form))
+    }).then(function (request) {
+        if (request.ok) {
+            request.json().then(function (response) {
+                if (response.status) {
+                    fillTableParam(response.dataset);
+                } else {
+                    sweetAlert(2, response.exception, null);
+                }
+            });
+        } else {
+            console.log(request.status + ' ' + request.statusText);
+        }
+    }).catch(function (error) {
+        console.log(error);
+    });
+}
